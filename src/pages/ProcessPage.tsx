@@ -1,20 +1,14 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Process from "@/components/Process";
-import Products from "@/components/Products";
-import Impact from "@/components/Impact";
 import Footer from "@/components/Footer";
+import Process from "@/components/Process";
+import Impact from "@/components/Impact";
 
-const Index = () => {
+const ProcessPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main>
-        <Hero />
-        <About />
+      <main className="pt-20">
         <Process />
-        <Products />
         <Impact />
       </main>
       <Footer />
@@ -22,4 +16,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default ProcessPage;

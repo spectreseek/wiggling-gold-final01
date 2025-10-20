@@ -99,14 +99,26 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter'];
+    @apply bg-background text-foreground font-['Montserrat'];
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-['Outfit'];
+    @apply font-['Playfair_Display'];
   }
   
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Premium animations */
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s infinite linear;
+    background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    background-size: 1000px 100%;
   }
 }
