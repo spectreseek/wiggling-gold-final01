@@ -42,7 +42,7 @@ const About = () => {
           {stats.map((stat, index) => (
             <Card 
               key={index}
-              className="p-6 text-center hover:shadow-medium transition-smooth animate-scale-in bg-card border-border"
+              className="p-6 text-center hover:shadow-medium transition-smooth animate-scale-in bg-card border-t-4 border-b-4 border-t-secondary border-b-secondary border-l border-r border-l-border border-r-border"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-earth rounded-full mb-4">

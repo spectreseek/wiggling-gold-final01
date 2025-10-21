@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
+import Benefits from "@/components/Benefits";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 
@@ -9,6 +10,7 @@ const Home = () => {
       <Navbar />
       <main>
         <HeroSlider />
+        <Benefits />
         <About />
       </main>
       <Footer />
