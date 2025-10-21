@@ -8,56 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 15%;
+    /* Main background - light beige/off-white #F9F9F9 */
+    --background: 0 0% 98%;
+    --foreground: 218 100% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 15%;
+    --card-foreground: 218 100% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 218 100% 15%;
 
-    /* Deep Blue - Primary brand color from logo */
-    --primary: 220 70% 35%;
+    /* Primary - Deep branded blue #002D72 */
+    --primary: 218 100% 22%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 220 60% 50%;
-    --primary-dark: 220 75% 25%;
+    --primary-light: 218 100% 35%;
+    --primary-dark: 218 100% 18%;
     
-    /* Golden Yellow - From logo "GOLD" */
-    --secondary: 45 95% 55%;
-    --secondary-foreground: 220 20% 15%;
-    --secondary-dark: 45 90% 45%;
+    /* Secondary - Pastel yellow/gold #F6E27F */
+    --secondary: 52 87% 73%;
+    --secondary-foreground: 218 100% 15%;
+    --secondary-dark: 52 87% 65%;
     
-    /* Vibrant Green - From logo leaf "o" */
-    --accent: 142 70% 45%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 142 65% 92%;
+    /* Accent - Light natural green #A8E6A1 */
+    --accent: 113 60% 76%;
+    --accent-foreground: 218 100% 15%;
+    --accent-light: 113 60% 92%;
+    --accent-dark: 113 60% 65%;
     
     /* Neutral tones */
-    --muted: 220 15% 96%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 218 20% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 220 70% 35%;
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 218 100% 22%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(220 70% 35%), hsl(220 60% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(45 95% 55%), hsl(45 90% 65%));
-    --gradient-accent: linear-gradient(135deg, hsl(142 70% 45%), hsl(142 65% 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 70% 25% / 0.95), hsl(220 60% 35% / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(218 100% 22%), hsl(218 100% 30%));
+    --gradient-secondary: linear-gradient(135deg, hsl(52 87% 73%), hsl(52 87% 80%));
+    --gradient-accent: linear-gradient(135deg, hsl(113 60% 76%), hsl(113 60% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(218 100% 22% / 0.85), hsl(218 100% 15% / 0.9));
     
-    /* Shadows */
-    --shadow-soft: 0 2px 20px -4px hsl(220 70% 35% / 0.12);
-    --shadow-medium: 0 8px 30px -6px hsl(220 70% 35% / 0.18);
-    --shadow-strong: 0 20px 60px -12px hsl(220 70% 35% / 0.25);
-    --shadow-glow-blue: 0 0 40px hsl(220 70% 50% / 0.3);
-    --shadow-glow-gold: 0 0 40px hsl(45 95% 55% / 0.3);
+    /* Shadows - Strong shadows for white boxes */
+    --shadow-soft: 0 2px 10px -2px hsl(218 100% 22% / 0.08);
+    --shadow-medium: 0 4px 20px -4px hsl(218 100% 22% / 0.12);
+    --shadow-strong: 0 8px 30px -6px hsl(218 100% 22% / 0.15);
+    --shadow-glow-blue: 0 0 30px hsl(218 100% 35% / 0.25);
+    --shadow-glow-gold: 0 0 30px hsl(52 87% 73% / 0.4);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,45 +67,46 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 45% 8%;
-    --foreground: 220 15% 95%;
+    --background: 218 40% 10%;
+    --foreground: 0 0% 95%;
 
-    --card: 220 40% 12%;
-    --card-foreground: 220 15% 95%;
+    --card: 218 35% 14%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 220 40% 12%;
-    --popover-foreground: 220 15% 95%;
+    --popover: 218 35% 14%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 220 65% 50%;
+    --primary: 218 100% 35%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 220 60% 65%;
-    --primary-dark: 220 70% 30%;
+    --primary-light: 218 100% 45%;
+    --primary-dark: 218 100% 25%;
 
-    --secondary: 45 95% 60%;
-    --secondary-foreground: 220 20% 15%;
-    --secondary-dark: 45 90% 50%;
+    --secondary: 52 87% 65%;
+    --secondary-foreground: 218 100% 15%;
+    --secondary-dark: 52 87% 55%;
 
-    --accent: 142 65% 50%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 142 60% 25%;
+    --accent: 113 60% 70%;
+    --accent-foreground: 218 100% 15%;
+    --accent-light: 113 60% 30%;
+    --accent-dark: 113 60% 60%;
 
-    --muted: 220 25% 18%;
-    --muted-foreground: 220 15% 65%;
+    --muted: 218 20% 20%;
+    --muted-foreground: 0 0% 65%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 22%;
-    --input: 220 25% 22%;
-    --ring: 220 65% 50%;
+    --border: 218 20% 25%;
+    --input: 218 20% 25%;
+    --ring: 218 100% 35%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(220 65% 40%), hsl(220 60% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(45 90% 55%), hsl(45 85% 65%));
-    --gradient-accent: linear-gradient(135deg, hsl(142 65% 40%), hsl(142 60% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 70% 20% / 0.95), hsl(220 65% 25% / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(218 100% 30%), hsl(218 100% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(52 87% 65%), hsl(52 87% 75%));
+    --gradient-accent: linear-gradient(135deg, hsl(113 60% 65%), hsl(113 60% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(218 100% 18% / 0.85), hsl(218 100% 12% / 0.9));
     
-    --shadow-glow-blue: 0 0 40px hsl(220 70% 50% / 0.4);
-    --shadow-glow-gold: 0 0 40px hsl(45 95% 55% / 0.4);
+    --shadow-glow-blue: 0 0 30px hsl(218 100% 35% / 0.3);
+    --shadow-glow-gold: 0 0 30px hsl(52 87% 73% / 0.35);
   }
 }
 
@@ -113,11 +116,11 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter'];
+    @apply bg-background text-foreground font-['Open_Sans'];
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-['Outfit'];
+    @apply font-['Montserrat'] font-bold;
   }
   
   html {
