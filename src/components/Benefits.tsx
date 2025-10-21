@@ -1,26 +1,21 @@
 import { Card } from "@/components/ui/card";
-import { Recycle, TrendingDown, Sprout, DollarSign } from "lucide-react";
+import { Utensils, Beef, Shield } from "lucide-react";
 
 const benefits = [
   {
-    icon: Recycle,
-    title: "Waste Reduction",
-    description: "Black soldier fly larvae can consume up to twice their body weight in organic waste daily, dramatically reducing landfill burden.",
+    icon: Utensils,
+    title: "Voracious Eaters",
+    description: "A single larva can consume twice its body weight in organic waste every single day.",
   },
   {
-    icon: TrendingDown,
-    title: "Carbon Footprint",
-    description: "Our bioconversion process produces 75% less greenhouse gas emissions compared to traditional composting methods.",
+    icon: Beef,
+    title: "Nutrient Rich",
+    description: "They naturally bio-accumulate high levels of protein and healthy fats, making them a perfect sustainable animal feed.",
   },
   {
-    icon: Sprout,
-    title: "Nutrient-Rich Output",
-    description: "Larvae convert waste into high-quality protein feed and organic fertilizer, creating value from what was once discarded.",
-  },
-  {
-    icon: DollarSign,
-    title: "Economic Value",
-    description: "Transform waste disposal costs into revenue streams through sustainable protein production and premium fertilizer.",
+    icon: Shield,
+    title: "Clean & Safe",
+    description: "The larval gut has antimicrobial properties that help neutralize harmful pathogens in waste.",
   },
 ];
 
@@ -30,7 +25,7 @@ const Benefits = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-6">
-            The Power of Black Soldier Fly
+            Meet Our Heroes: The Black Soldier Fly
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Nature's most efficient bioconverter transforms organic waste into valuable resources. 
@@ -38,7 +33,7 @@ const Benefits = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
             <Card 
               key={index}
