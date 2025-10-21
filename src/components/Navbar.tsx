@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Leaf, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/wiggling-gold-logo.jpg";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,12 +22,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-gradient-earth p-2.5 rounded-xl group-hover:shadow-medium transition-smooth">
-              <Leaf className="h-7 w-7 text-primary-foreground" />
-            </div>
-            <span className="text-2xl font-bold text-foreground">
-              Wiggling Gold
-            </span>
+            <img 
+              src={logo} 
+              alt="Wiggling Gold Logo" 
+              className="h-12 w-auto transition-smooth group-hover:scale-105"
+            />
           </Link>
           
           {/* Desktop Navigation */}
@@ -48,7 +48,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link to="/contact">
-              <Button className="bg-gradient-earth hover:opacity-90 transition-smooth shadow-soft rounded-full px-6">
+              <Button className="bg-gradient-primary hover:opacity-90 transition-smooth shadow-soft hover:shadow-glow-blue rounded-full px-6">
                 Contact Us
               </Button>
             </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                <Button className="bg-gradient-earth hover:opacity-90 transition-smooth w-full rounded-full">
+                <Button className="bg-gradient-primary hover:opacity-90 transition-smooth w-full rounded-full">
                   Contact Us
                 </Button>
               </Link>
