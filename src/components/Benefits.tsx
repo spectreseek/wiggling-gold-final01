@@ -28,8 +28,7 @@ const Benefits = () => {
             Meet Our Heroes: The Black Soldier Fly
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Nature's most efficient bioconverter transforms organic waste into valuable resources. 
-            Discover how black soldier fly larvae are revolutionizing sustainable waste management.
+            The Black Soldier Fly (*Hermetia illucens*) is a remarkable insect. Unlike common houseflies, they are not pests, do not bite, and are not attracted to human habitats. Their true power lies in their larval stage.
           </p>
         </div>
         
