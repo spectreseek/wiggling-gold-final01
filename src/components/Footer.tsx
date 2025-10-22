@@ -104,7 +104,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-background/20 text-center">
           <p className="text-background/60">
-            &copy; {new Date().getFullYear()} Wiggling Gold. All rights reserved. Building a sustainable future together.
+            &copy; {new Date().getFullYear()} Wiggling Gold. All rights reserved.
           </p>
         </div>
       </div>
