@@ -1,84 +1,63 @@
-import { Card } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
-import larvaeImage from "@/assets/larvae-process.jpg";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Trash2, Bug, Sparkles } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    title: "Waste Collection",
-    description: "We collect organic waste from markets, breweries, and food processing facilities.",
+    title: "Collect Waste",
+    description: "We partner with local industries to safely collect organic waste streams, diverting them from landfills.",
+    icon: Trash2,
   },
   {
     number: "02",
-    title: "Larvae Processing",
-    description: "Black soldier fly larvae efficiently consume and break down organic waste.",
+    title: "Feed Larvae",
+    description: "Millions of BSF larvae consume the waste in a rapid 14-day bioconversion cycle, reducing waste volume by up to 90%.",
+    icon: Bug,
   },
   {
     number: "03",
-    title: "Product Creation",
-    description: "Larvae are processed into high-protein animal feed and organic fertilizer.",
-  },
-  {
-    number: "04",
-    title: "Distribution",
-    description: "Premium products delivered to farms and agricultural partners.",
+    title: "Produce Gold",
+    description: "We process the final products: **BSF Protein Meal** (feed) and **Organic Frass** (fertilizer), completing the circular loop.",
+    icon: Sparkles,
   },
 ];
 
 const Process = () => {
   return (
-    <section id="process" className="py-24 bg-background">
+    <section className="py-24 bg-accent/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-6">
-            Our Sustainable Process
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            From waste to wealth - discover how we transform organic waste into valuable products through nature's most efficient recyclers.
-          </p>
-        </div>
+        <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-12 text-center animate-fade-in">
+          Our Sustainable Process in Action
+        </h2>
         
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 animate-slide-up">
-            {steps.map((step, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
               <Card 
                 key={index}
-                className="p-6 hover:shadow-medium transition-smooth bg-card border-border"
+                className="relative overflow-hidden border-2 hover:border-secondary transition-all duration-300 hover:shadow-glow-blue animate-fade-in bg-card/80 backdrop-blur-sm"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gradient-gold rounded-full flex items-center justify-center">
-                      <span className="text-lg font-bold text-secondary-foreground">
-                        {step.number}
-                      </span>
+                <CardHeader>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-secondary/10 p-3 rounded-full">
+                      <Icon className="w-6 h-6 text-secondary" />
                     </div>
+                    <span className="text-5xl font-bold text-secondary/20">{step.number}</span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold font-['Outfit'] text-foreground mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </div>
-                  <ArrowRight className="h-6 w-6 text-primary flex-shrink-0 opacity-50" />
-                </div>
+                  <CardTitle className="text-2xl">{step.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base leading-relaxed">
+                    {step.description.split('**').map((part, i) => 
+                      i % 2 === 1 ? <strong key={i} className="text-secondary font-semibold">{part}</strong> : part
+                    )}
+                  </CardDescription>
+                </CardContent>
               </Card>
-            ))}
-          </div>
-          
-          <div className="relative animate-scale-in">
-            <div className="relative rounded-2xl overflow-hidden shadow-strong">
-              <img 
-                src={larvaeImage} 
-                alt="Black soldier fly larvae processing organic waste"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-            </div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-gold rounded-full blur-3xl opacity-30"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-earth rounded-full blur-3xl opacity-30"></div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

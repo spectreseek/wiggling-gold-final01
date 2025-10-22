@@ -37,12 +37,12 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-base font-medium transition-smooth relative group ${
                   isActive(link.path)
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-emerald-400"
+                    : "text-blue-500 hover:text-emerald-400"
                 }`}
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-emerald-400 transition-all duration-300 ${
                   isActive(link.path) ? "w-full" : "w-0 group-hover:w-full"
                 }`}></span>
               </Link>
@@ -75,8 +75,8 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`text-base font-medium transition-smooth px-4 py-2 rounded-lg ${
                     isActive(link.path)
-                      ? "text-primary bg-accent"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      ? "text-emerald-400 bg-accent"
+                      : "text-blue-500 hover:text-emerald-400 hover:bg-accent"
                   }`}
                 >
                   {link.label}
