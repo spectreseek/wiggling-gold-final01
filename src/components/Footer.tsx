@@ -1,4 +1,5 @@
-import { Leaf, Mail, Phone, MapPin } from "lucide-react";
+import { Leaf, Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -15,8 +16,19 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-background/80 mb-4">
-              Transforming waste into sustainable solutions for a better tomorrow.
+              <span className="text-secondary font-semibold">Turning dirt into gold</span> | Transforming waste into sustainable solutions for a better tomorrow.
             </p>
+            <div className="flex gap-3 mt-4">
+              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+                <MessageCircle className="h-5 w-5 text-background" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+                <Linkedin className="h-5 w-5 text-background" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+                <Facebook className="h-5 w-5 text-background" />
+              </a>
+            </div>
           </div>
           
           <div>

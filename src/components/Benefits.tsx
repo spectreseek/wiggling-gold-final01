@@ -1,19 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Utensils, Beef, Shield } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
+import blackSoldierFly from "@/assets/black-soldier-fly.jpg";
 
 const benefits = [
   {
-    icon: Utensils,
     title: "Voracious Eaters",
     description: "A single larva can consume twice its body weight in organic waste every single day.",
   },
   {
-    icon: Beef,
     title: "Nutrient Rich",
     description: "They naturally bio-accumulate high levels of protein and healthy fats, making them a perfect sustainable animal feed.",
   },
   {
-    icon: Shield,
     title: "Clean & Safe",
     description: "The larval gut has antimicrobial properties that help neutralize harmful pathogens in waste.",
   },
@@ -32,24 +29,36 @@ const Benefits = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {benefits.map((benefit, index) => (
-            <Card 
-              key={index}
-              className="p-6 text-center hover:shadow-medium transition-smooth animate-scale-in bg-card border-t-4 border-b-4 border-t-secondary border-b-secondary border-l border-r border-l-border border-r-border"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-secondary rounded-full mb-4">
-                <benefit.icon className="h-7 w-7 text-secondary-foreground" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="animate-scale-in">
+            <img 
+              src={blackSoldierFly} 
+              alt="Black Soldier Fly" 
+              className="w-full h-auto rounded-2xl shadow-elegant"
+            />
+          </div>
+          
+          <div className="space-y-6">
+            {benefits.map((benefit, index) => (
+              <div 
+                key={index}
+                className="flex items-start gap-4 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex-shrink-0 mt-1">
+                  <CircleCheckBig className="h-8 w-8 text-green-500" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-['Montserrat'] text-foreground mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold font-['Montserrat'] text-foreground mb-3">
-                {benefit.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {benefit.description}
-              </p>
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
