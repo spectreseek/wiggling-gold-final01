@@ -1,12 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/wiggling-gold-logo.jpg";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -18,7 +28,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-4 left-4 right-4 z-50 bg-background/90 backdrop-blur-xl border border-border shadow-glow-blue rounded-full">
+    <nav className={`fixed z-50 bg-background/90 backdrop-blur-xl border border-border transition-smooth ${
+      isScrolled 
+        ? "top-0 left-0 right-0 shadow-sm rounded-none" 
+        : "top-4 left-4 right-4 shadow-glow-blue rounded-full"
+    }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3 group">
