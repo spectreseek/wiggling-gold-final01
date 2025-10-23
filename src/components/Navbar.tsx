@@ -37,8 +37,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-base font-medium transition-smooth px-6 py-2 rounded-full ${
                   isActive(link.path)
-                    ? "text-emerald-400 bg-accent"
-                    : "text-blue-500 hover:text-emerald-400 hover:bg-accent/50"
+                    ? "text-blue-900 bg-accent"
+                    : "text-blue-900 hover:bg-accent/50"
                 }`}
               >
                 {link.label}
@@ -72,8 +72,8 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`text-base font-medium transition-smooth px-4 py-2 rounded-full ${
                     isActive(link.path)
-                      ? "text-emerald-400 bg-accent"
-                      : "text-blue-500 hover:text-emerald-400 hover:bg-accent"
+                      ? "text-blue-900 bg-accent"
+                      : "text-blue-900 hover:bg-accent"
                   }`}
                 >
                   {link.label}
