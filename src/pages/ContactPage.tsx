@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MapLocation from "@/components/MapLocation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -181,6 +182,38 @@ const ContactPage = () => {
                     Partnership Information
                   </Button>
                 </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Map Section */}
+        <section className="py-20 bg-accent">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  Find Us
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Visit our location or view directions on the map
+                </p>
+              </div>
+              <MapLocation />
+              <div className="text-center mt-6">
+                <Button 
+                  variant="outline" 
+                  asChild
+                  className="border-2"
+                >
+                  <a 
+                    href="https://maps.app.goo.gl/f1fwhj13pLnP4DNZ7?g_st=awb" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Open in Google Maps
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
