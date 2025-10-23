@@ -30,21 +30,18 @@ const Navbar = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-base font-medium transition-smooth relative group ${
+                className={`text-base font-medium transition-smooth px-6 py-2 rounded-full ${
                   isActive(link.path)
-                    ? "text-emerald-400"
-                    : "text-blue-500 hover:text-emerald-400"
+                    ? "text-emerald-400 bg-accent"
+                    : "text-blue-500 hover:text-emerald-400 hover:bg-accent/50"
                 }`}
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-emerald-400 transition-all duration-300 ${
-                  isActive(link.path) ? "w-full" : "w-0 group-hover:w-full"
-                }`}></span>
               </Link>
             ))}
             <Link to="/contact">
@@ -73,7 +70,7 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-base font-medium transition-smooth px-4 py-2 rounded-lg ${
+                  className={`text-base font-medium transition-smooth px-4 py-2 rounded-full ${
                     isActive(link.path)
                       ? "text-emerald-400 bg-accent"
                       : "text-blue-500 hover:text-emerald-400 hover:bg-accent"
