@@ -19,7 +19,7 @@ const Footer = () => {
               <span className="text-secondary font-semibold">Turning dirt into gold</span> | Transforming waste into sustainable solutions for a better tomorrow.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+              <a href="https://wa.me/233556943631" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
                 <MessageCircle className="h-5 w-5 text-background" />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
@@ -88,15 +88,23 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <Mail className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span className="text-background/80">info@wigglinggold.com</span>
+                <a href="mailto:askwigglinggold@gmail.com" className="text-background/80 hover:text-secondary transition-smooth">
+                  askwigglinggold@gmail.com
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span className="text-background/80">+1 (555) 123-4567</span>
+                <div className="text-background/80">
+                  <a href="tel:0556943631" className="hover:text-secondary transition-smooth">0556943631</a>
+                  {" / "}
+                  <a href="tel:0556943630" className="hover:text-secondary transition-smooth">0556943630</a>
+                </div>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span className="text-background/80">123 Green Street, Eco City</span>
+                <a href="https://maps.app.goo.gl/f1fwhj13pLnP4DNZ7?g_st=awb" target="_blank" rel="noopener noreferrer" className="text-background/80 hover:text-secondary transition-smooth">
+                  View Our Location
+                </a>
               </li>
             </ul>
           </div>

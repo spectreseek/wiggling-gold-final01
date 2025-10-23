@@ -10,20 +10,20 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    detail: "info@wigglinggold.com",
-    link: "mailto:info@wigglinggold.com",
+    detail: "askwigglinggold@gmail.com",
+    link: "mailto:askwigglinggold@gmail.com",
   },
   {
     icon: Phone,
     title: "Call Us",
-    detail: "+1 (555) 123-4567",
-    link: "tel:+15551234567",
+    detail: "0556943631 / 0556943630",
+    link: "tel:0556943631",
   },
   {
     icon: MapPin,
     title: "Visit Us",
-    detail: "123 Green Street, Eco City",
-    link: "#",
+    detail: "View Our Location on Maps",
+    link: "https://maps.app.goo.gl/f1fwhj13pLnP4DNZ7?g_st=awb",
   },
 ];
 

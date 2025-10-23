@@ -5,6 +5,7 @@ import CircularEconomy from "@/components/CircularEconomy";
 import Process from "@/components/Process";
 import Markets from "@/components/Markets";
 import About from "@/components/About";
+import Services from "@/components/Services";
 import Footer from "@/components/Footer";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
         <Benefits />
         <Process />
         <Markets />
+        <Services />
         <About />
       </main>
       <Footer />

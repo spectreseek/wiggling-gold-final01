@@ -6,21 +6,21 @@ import productsImage from "@/assets/products.jpg";
 const products = [
   {
     icon: Beef,
-    title: "Premium Larvae Feed",
-    description: "High-protein animal feed rich in essential amino acids, perfect for poultry, fish, and livestock.",
-    features: ["65% protein content", "Sustainable source", "GMO-free"],
-  },
-  {
-    icon: Sprout,
-    title: "Organic Fertilizer",
-    description: "Nutrient-rich organic fertilizer derived from larvae frass, ideal for sustainable agriculture.",
-    features: ["100% organic", "Soil enrichment", "Eco-friendly"],
+    title: "Live Larvae as Broodstock",
+    description: "Premium live black soldier fly larvae for breeding and feed production.",
+    features: ["High quality", "Healthy stock", "Ready to use"],
   },
   {
     icon: Droplets,
-    title: "Bioactive Compounds",
-    description: "Specialized extracts and compounds for pharmaceutical and cosmetic applications.",
-    features: ["Pure extraction", "Medical grade", "Research-backed"],
+    title: "Dried Larvae as Feed",
+    description: "High-protein dried larvae perfect for poultry, fish, and livestock nutrition.",
+    features: ["65% protein", "Long shelf life", "Easy storage"],
+  },
+  {
+    icon: Sprout,
+    title: "Black Soldier Fly Eggs",
+    description: "Premium BSF eggs as broodstock for starting or expanding your production.",
+    features: ["High viability", "Clean batches", "Fast delivery"],
   },
 ];
 
@@ -88,6 +88,11 @@ const Products = () => {
         </div>
         
         <div className="text-center animate-fade-in">
+          <Card className="p-6 max-w-2xl mx-auto mb-8 bg-accent border-border">
+            <p className="text-lg text-foreground">
+              <span className="font-semibold">Plus:</span> We sell everything found in black soldier fly setup - from equipment to supplies!
+            </p>
+          </Card>
           <Button size="lg" className="bg-gradient-earth hover:opacity-90 transition-smooth shadow-medium">
             Request Product Catalog
           </Button>
