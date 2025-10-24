@@ -30,11 +30,11 @@ const Benefits = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-scale-in">
+          <div className="animate-scale-in flex justify-center">
             <img 
               src={blackSoldierFly} 
               alt="Black Soldier Fly" 
-              className="w-full h-auto rounded-2xl shadow-elegant"
+              className="w-[60%] h-auto rounded-2xl shadow-elegant"
             />
           </div>
           
