@@ -1,6 +1,6 @@
 const CircularEconomy = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-[#F2F2F2]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-8 text-center animate-fade-in">

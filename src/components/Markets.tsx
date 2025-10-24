@@ -40,7 +40,7 @@ const Markets = () => {
             return (
               <div 
                 key={index}
-                className="group bg-card rounded-2xl p-8 shadow-[--shadow-medium] hover:shadow-[--shadow-strong] transition-all duration-300 hover:-translate-y-2"
+                className="group bg-[#F2F2F2] rounded-2xl p-8 shadow-[--shadow-medium] hover:shadow-[--shadow-strong] transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-accent/20 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/30 transition-colors duration-300">
                   <Icon className="w-8 h-8 text-accent-dark" />

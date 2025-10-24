@@ -34,7 +34,7 @@ const Benefits = () => {
             <img 
               src={blackSoldierFly} 
               alt="Black Soldier Fly" 
-              className="w-[60%] h-auto rounded-2xl shadow-elegant"
+              className="w-[48%] h-auto rounded-2xl shadow-elegant"
             />
           </div>
           
