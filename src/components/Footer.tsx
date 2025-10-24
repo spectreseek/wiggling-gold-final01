@@ -1,5 +1,6 @@
-import { Leaf, Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
 import { MessageCircle } from "lucide-react";
+import logo from "@/assets/wiggling-gold-logo.png";
 
 const Footer = () => {
   return (
@@ -8,9 +9,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="bg-gradient-earth p-2 rounded-lg">
-                <Leaf className="h-6 w-6 text-primary-foreground" />
-              </div>
+              <img src={logo} alt="Wiggling Gold Logo" className="h-10 w-10 object-contain" />
               <span className="text-xl font-bold font-['Outfit']">
                 Wiggling Gold
               </span>
