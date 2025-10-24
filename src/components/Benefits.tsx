@@ -1,5 +1,5 @@
 import { CircleCheckBig } from "lucide-react";
-import blackSoldierFly from "@/assets/black-soldier-fly.jpg";
+import blackSoldierFly from "@/assets/black-soldier-fly.png";
 
 const benefits = [
   {
