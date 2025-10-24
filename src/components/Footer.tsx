@@ -6,10 +6,10 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Wiggling Gold Logo" className="h-10 w-10 object-contain" />
+              <img src={logo} alt="Wiggling Gold Logo" className="h-15 w-15 object-contain" />
               <span className="text-xl font-bold font-['Outfit']">
                 Wiggling Gold
               </span>
@@ -51,32 +51,6 @@ const Footer = () => {
               <li>
                 <a href="#impact" className="text-background/80 hover:text-secondary transition-smooth">
                   Impact
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-bold font-['Outfit'] text-lg mb-4">Resources</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-background/80 hover:text-secondary transition-smooth">
-                  Product Catalog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-background/80 hover:text-secondary transition-smooth">
-                  Partner Portal
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-background/80 hover:text-secondary transition-smooth">
-                  Sustainability Report
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-background/80 hover:text-secondary transition-smooth">
-                  News & Updates
                 </a>
               </li>
             </ul>
