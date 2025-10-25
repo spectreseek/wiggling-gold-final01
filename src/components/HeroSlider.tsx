@@ -3,35 +3,54 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import larvaeImage from "@/assets/larvae-process.jpg";
+import larvaeHandsImage from "@/assets/black-soldier-fly-larvae.jpg";
 import productsImage from "@/assets/products.jpg";
 
 const slides = [
   {
     image: heroImage,
-    badge: "Sustainable Innovation",
-    title: "Transforming Waste Into",
-    highlight: "Premium Animal Feed",
-    description: "Leading the circular economy with black soldier fly technology. Converting organic waste into high-value protein and sustainable solutions.",
-    cta: "Discover Our Process",
+    badge: "The Problem Statement",
+    title: "Ghana's Twin Crisis",
+    highlight: "",
+    description: "Farmers struggle with soaring imported feed costs. Mountains of organic waste overflow in our markets, breweries, and processing facilities. Two problems. One solution.",
+    cta: "Discover How",
     ctaLink: "/process",
   },
   {
-    image: larvaeImage,
-    badge: "Nature's Recyclers",
-    title: "Powered by",
-    highlight: "Black Soldier Fly Larvae",
-    description: "Harnessing nature's most efficient waste processors to create sustainable, protein-rich animal feed and organic fertilizers.",
-    cta: "Learn More",
-    ctaLink: "/about",
+    image: larvaeHandsImage,
+    badge: "The Solution",
+    title: "Meet Nature's Most",
+    highlight: "Efficient Recycler",
+    description: "Wiggling Gold Ghana harnesses the Black Soldier Fly to transform waste streams into wealth. Our larvae convert brewery grain and market scraps into premium protein feed and organic fertilizer—right here in Ghana.",
+    cta: "See Our Process",
+    ctaLink: "/process",
   },
   {
     image: productsImage,
-    badge: "Premium Quality",
-    title: "Sustainable Products",
-    highlight: "For Modern Agriculture",
-    description: "From organic waste to premium products. Our innovative solutions support sustainable farming and reduce environmental impact.",
-    cta: "View Products",
-    ctaLink: "/products",
+    badge: "The Impact - Farmers",
+    title: "Cut Your Feed Costs",
+    highlight: "by Up to 40%",
+    description: "Stop paying premium prices for imported fishmeal and soy. Our Black Soldier Fly protein delivers the same quality nutrition your livestock needs—at a fraction of the cost.",
+    cta: "Get a Quote",
+    ctaLink: "/contact",
+  },
+  {
+    image: heroImage,
+    badge: "The Impact - Environment",
+    title: "From Waste to",
+    highlight: "Worth",
+    description: "Every kilogram of our feed diverts organic waste from landfills and reduces Ghana's dependence on imports. We're building West Africa's circular economy, one larva at a time.",
+    cta: "Our Impact",
+    ctaLink: "/about",
+  },
+  {
+    image: larvaeImage,
+    badge: "The Vision",
+    title: "Proudly Ghanaian.",
+    highlight: "Truly Sustainable.",
+    description: "Local solutions for local challenges. Wiggling Gold is powering agricultural independence through innovation, turning what Ghana already has into exactly what our farmers need.",
+    cta: "Partner With Us",
+    ctaLink: "/contact",
   },
 ];
 
@@ -44,7 +63,7 @@ const HeroSlider = () => {
     
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
@@ -79,6 +98,9 @@ const HeroSlider = () => {
             className="absolute inset-0 bg-cover bg-center scale-110 transition-transform duration-[8000ms] ease-out"
             style={{ 
               backgroundImage: `url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
               transform: index === currentSlide ? 'scale(1)' : 'scale(1.1)'
             }}
           >

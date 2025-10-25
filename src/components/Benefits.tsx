@@ -29,8 +29,8 @@ const Benefits = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-scale-in flex justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="animate-scale-in flex justify-end pr-8">
             <img 
               src={blackSoldierFly} 
               alt="Black Soldier Fly" 

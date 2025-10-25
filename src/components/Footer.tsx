@@ -9,10 +9,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Wiggling Gold Logo" className="h-15 w-15 object-contain" />
-              <span className="text-xl font-bold font-['Outfit']">
-                Wiggling Gold
-              </span>
+              <img src={logo} alt="Wiggling Gold Logo" className="h-10 w-10 object-contain" />
             </div>
             <p className="text-background/80 mb-4">
               <span className="text-secondary font-semibold">Turning dirt into gold</span> | Transforming waste into sustainable solutions for a better tomorrow.
