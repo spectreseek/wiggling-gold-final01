@@ -30,7 +30,7 @@ const Benefits = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="animate-scale-in flex justify-end pr-8">
+          <div className="animate-scale-in flex justify-end pr-8 lg:justify-end lg:pr-8 justify-center pr-0">
             <img 
               src={blackSoldierFly} 
               alt="Black Soldier Fly" 

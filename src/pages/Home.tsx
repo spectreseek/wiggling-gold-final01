@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
-import Benefits from "@/components/Benefits";
+import ThreePillars from "@/components/ThreePillars";
+import MeetOurHeroes from "@/components/MeetOurHeroes";
 import CircularEconomy from "@/components/CircularEconomy";
 import Process from "@/components/Process";
 import Markets from "@/components/Markets";
@@ -14,8 +15,9 @@ const Home = () => {
       <Navbar />
       <main>
         <HeroSlider />
+        <ThreePillars />
+        <MeetOurHeroes />
         <CircularEconomy />
-        <Benefits />
         <Process />
         <Markets />
         <Services />

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/wiggling-gold-logo.png";
+import logo from "@/assets/wigo-logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,6 +25,7 @@ const Navbar = () => {
     { path: "/about", label: "About" },
     { path: "/process", label: "Process" },
     { path: "/products", label: "Products" },
+    { path: "/faq", label: "FAQ" },
   ];
 
   return (
@@ -35,12 +36,13 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex flex-col items-start gap-0 group">
             <img 
               src={logo} 
-              alt="Wiggling Gold Logo" 
+              alt="WIGO Logo" 
               className="h-16 w-auto transition-smooth group-hover:scale-105"
             />
+            <p className="text-blue-900 text-[0.9rem] font-medium -mt-1">WigglingGold Limited</p>
           </Link>
           
           {/* Desktop Navigation */}

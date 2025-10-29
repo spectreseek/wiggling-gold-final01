@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import logo from "@/assets/wiggling-gold-logo.png";
+import logo from "@/assets/wigo-footer-logo.png";
 
 const Footer = () => {
   return (
@@ -8,8 +8,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Wiggling Gold Logo" className="h-10 w-10 object-contain" />
+            <div className="flex flex-col items-start gap-0.5">
+              <img src={logo} alt="WIGO Logo" className="h-16 w-auto object-contain" />
+              <p className="text-white text-sm font-medium mb-3">WigglingGold Limited</p>
             </div>
             <p className="text-background/80 mb-4">
               <span className="text-secondary font-semibold">Turning dirt into gold</span> | Transforming waste into sustainable solutions for a better tomorrow.
