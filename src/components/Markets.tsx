@@ -3,7 +3,8 @@ import { ArrowUpRight, Check } from "lucide-react";
 import fishFarmImg from "@/assets/aquaculture-tilapia.jpg";
 import poultryFarmImg from "@/assets/poultry-broilers.jpg";
 import facilityImg from "@/assets/hero-image.jpg";
-import flyImg from "@/assets/black-soldier-fly.jpg";
+import feedMillImg from "@/assets/feed-mill.jpg";
+import bsfLarvaeImg from "@/assets/bsf-larvae.jpg";
 import agricultureImg from "@/assets/products.jpg";
 
 type MarketCardData = {
@@ -61,7 +62,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "FEED PRODUCERS",
     categoryColor: "#0ea5a0", // teal
-    image: flyImg,
+    image: feedMillImg,
     title: "BSF Ingredients for Feed Manufacturers",
     description:
       "Consistent, scalable BSF protein meal and oil that integrates seamlessly into commercial feed formulations.",
@@ -103,7 +104,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "BSF ENTREPRENEURSHIP",
     categoryColor: "#10b981", // green
-    image: flyImg,
+    image: bsfLarvaeImg,
     title: "Prospective BSF Entrepreneurs",
     description:
       "End-to-end support to launch and scale BSF ventures—from starter kits to operational playbooks.",
