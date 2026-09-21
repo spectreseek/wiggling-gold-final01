@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -108,6 +109,7 @@ const comparisonData = [
 ];
 
 const ProductsPage = () => {
+  usePageMeta("Products | Wiggling Gold");
   return (
     <div className="min-h-screen">
       <Navbar />

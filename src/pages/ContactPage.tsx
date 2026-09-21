@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MapLocation from "@/components/MapLocation";
@@ -29,6 +30,7 @@ const contactInfo = [
 ];
 
 const ContactPage = () => {
+  usePageMeta("Contact Us | Wiggling Gold");
   return (
     <div className="min-h-screen">
       <Navbar />

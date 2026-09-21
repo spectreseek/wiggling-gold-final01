@@ -1,4 +1,5 @@
 import { CheckCircle, Clock, Zap, Shield, Leaf, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blackSoldierFly from "@/assets/black-soldier-fly.png";
 
@@ -12,6 +13,7 @@ const features = [
 ];
 
 const MeetOurHeroes = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +58,7 @@ const MeetOurHeroes = () => {
             <Button 
               size="lg" 
               className="bg-primary text-primary-foreground hover:bg-primary/90 transition-smooth shadow-strong text-base h-14 px-8 rounded-full font-semibold"
-              onClick={() => window.location.href = '/process'}
+              onClick={() => navigate('/process')}
             >
               See How It Works
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -66,11 +68,13 @@ const MeetOurHeroes = () => {
           {/* Right Column - Visual Content */}
           <div className="order-1 lg:order-2 relative">
             <div className="relative flex justify-center">
-              <img 
-                src={blackSoldierFly} 
-                alt="Black Soldier Fly larvae" 
-                className="w-[80%] h-auto"
-                style={{ maxWidth: '85%' }}
+              {/* Source image is 385px wide, so cap the display width to avoid upscaling blur. */}
+              <img
+                src={blackSoldierFly}
+                alt="Adult black soldier fly seen from above"
+                width={385}
+                height={648}
+                className="w-full max-w-[385px] h-auto"
               />
               
               {/* Stats Badge Overlay */}

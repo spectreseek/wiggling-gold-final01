@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -28,6 +29,7 @@ const values = [
 ];
 
 const AboutPage = () => {
+  usePageMeta("About Us | Wiggling Gold");
   return (
     <div className="min-h-screen">
       <Navbar />

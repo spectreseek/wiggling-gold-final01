@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -204,6 +205,7 @@ const faqData = [
 ];
 
 const FAQPage = () => {
+  usePageMeta("FAQ | Wiggling Gold");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());

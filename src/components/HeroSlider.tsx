@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
@@ -67,16 +68,23 @@ const slides = [
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
+
+  // Visitors who ask their device for reduced motion get a slider that never auto-advances.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setIsAutoPlaying(false);
+  }, []);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
+    if (!isAutoPlaying || isPaused) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, isPaused]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -94,13 +102,24 @@ const HeroSlider = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
       {/* Slides */}
-      {slides.map((slide, index) => (
+      {slides.map((slide, index) => {
+        // Only the first slide carries the page's h1, so the page has exactly one.
+        const Heading = index === 0 ? "h1" : "h2";
+        const isActive = index === currentSlide;
+        return (
         <div
           key={index}
+          aria-hidden={!isActive}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            isActive ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
           {/* Background Image with Parallax Effect */}
@@ -132,14 +151,14 @@ const HeroSlider = () => {
                 </span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-4 leading-tight">
+              <Heading className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-4 leading-tight">
                 {slide.title}
                 <span className={`block text-secondary mt-2 drop-shadow-lg ${
                   slide.compactHighlight ? "text-3xl md:text-5xl lg:text-6xl" : ""
                 }`}>
                   {slide.highlight}
                 </span>
-              </h1>
+              </Heading>
               
               <p className="text-xl md:text-2xl text-primary-foreground/95 mb-10 max-w-3xl leading-relaxed font-light">
                 {slide.description}
@@ -149,7 +168,8 @@ const HeroSlider = () => {
                 <Button 
                   size="lg" 
                   className="bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-smooth shadow-strong text-base h-14 px-8 rounded-full font-semibold"
-                  onClick={() => window.location.href = slide.ctaLink}
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => navigate(slide.ctaLink)}
                 >
                   {slide.cta}
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -158,7 +178,8 @@ const HeroSlider = () => {
                   size="lg" 
                   variant="outline" 
                   className="bg-primary-foreground/10 backdrop-blur-md border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/20 transition-smooth text-base h-14 px-8 rounded-full font-semibold"
-                  onClick={() => window.location.href = "/contact"}
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => navigate("/contact")}
                 >
                   Contact Us
                 </Button>
@@ -166,8 +187,9 @@ const HeroSlider = () => {
             </div>
           </div>
         </div>
-      ))}
-      
+        );
+      })}
+
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
@@ -190,7 +212,7 @@ const HeroSlider = () => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
+            className={`relative before:absolute before:-inset-[6px] before:content-[''] transition-all duration-300 rounded-full ${
               index === currentSlide 
                 ? "w-12 h-3 bg-secondary" 
                 : "w-3 h-3 bg-primary-foreground/40 hover:bg-primary-foreground/60"

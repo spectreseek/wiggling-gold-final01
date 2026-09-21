@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -77,6 +78,7 @@ const supportTypes = [
 ];
 
 const ProjectMansaPage = () => {
+  usePageMeta("Project Mansa | Wiggling Gold Limited", "Project Mansa is a nationwide Black Soldier Fly development initiative by Wiggling Gold Limited, building training, regional processing hubs and a national hub across all 16 regions of Ghana.");
   return (
     <div className="min-h-screen">
       <Navbar />

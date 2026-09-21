@@ -1,9 +1,11 @@
+import { usePageMeta } from "@/hooks/use-page-meta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Process from "@/components/Process";
 import Impact from "@/components/Impact";
 
 const ProcessPage = () => {
+  usePageMeta("Our Process | Wiggling Gold");
   return (
     <div className="min-h-screen">
       <Navbar />
