@@ -51,6 +51,11 @@ const Footer = () => {
                   Impact
                 </a>
               </li>
+              <li>
+                <a href="/project-mansa" className="text-background/80 hover:text-secondary transition-smooth">
+                  Project Mansa
+                </a>
+              </li>
             </ul>
           </div>
           

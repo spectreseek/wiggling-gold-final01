@@ -25,6 +25,7 @@ const Navbar = () => {
     { path: "/about", label: "About" },
     { path: "/process", label: "Process" },
     { path: "/products", label: "Products" },
+    { path: "/project-mansa", label: "Project Mansa" },
     { path: "/faq", label: "FAQ" },
   ];
 
@@ -51,7 +52,7 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-base font-medium transition-smooth px-6 py-2 rounded-full ${
+                className={`text-base font-medium transition-smooth px-4 xl:px-6 py-2 rounded-full whitespace-nowrap ${
                   isActive(link.path)
                     ? "text-blue-900 bg-accent"
                     : "text-blue-900 hover:bg-accent/50"

@@ -8,6 +8,16 @@ import productsImage from "@/assets/products.jpg";
 
 const slides = [
   {
+    image: larvaeHandsImage,
+    badge: "New Initiative",
+    title: "Project Mansa",
+    highlight: "Train. Produce. Process. Prosper.",
+    compactHighlight: true,
+    description: "A nationwide Black Soldier Fly initiative by Wiggling Gold Limited, building a sustainable insect farming ecosystem across all 16 regions of Ghana.",
+    cta: "Discover Project Mansa",
+    ctaLink: "/project-mansa",
+  },
+  {
     image: heroImage,
     badge: "The Problem Statement",
     title: "Ghana's Twin Crisis",
@@ -124,7 +134,9 @@ const HeroSlider = () => {
               
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-4 leading-tight">
                 {slide.title}
-                <span className="block text-secondary mt-2 drop-shadow-lg">
+                <span className={`block text-secondary mt-2 drop-shadow-lg ${
+                  slide.compactHighlight ? "text-3xl md:text-5xl lg:text-6xl" : ""
+                }`}>
                   {slide.highlight}
                 </span>
               </h1>
