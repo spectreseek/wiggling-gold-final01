@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
 import { Dialog, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
 import flyerImg from "@/assets/project-mansa-flyer.jpg";
 
@@ -9,8 +9,10 @@ const WHATSAPP_MESSAGE = "Hello, I would like to know more about Project Mansa."
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 // Flyer is 1275x1650 (portrait). Width is capped by both the viewport width and
-// the viewport height, so the whole flyer always fits without cropping or scrolling.
+// the viewport height (minus the WhatsApp bar under the flyer), so the whole
+// popup always fits without cropping or scrolling.
 const FLYER_RATIO = 1275 / 1650;
+const CTA_HEIGHT = "3rem";
 
 // Opens on every mount of the home page (no persistence), so a refresh or
 // returning to Home shows it again.
@@ -23,11 +25,11 @@ const FlyerPopup = () => {
         <DialogOverlay />
         <DialogPrimitive.Content
           className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 outline-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-          style={{ width: `min(92vw, calc(88dvh * ${FLYER_RATIO}))` }}
+          style={{ width: `min(92vw, calc((96dvh - ${CTA_HEIGHT}) * ${FLYER_RATIO}))` }}
         >
           <DialogTitle className="sr-only">Project Mansa - Phase 1 Training</DialogTitle>
           <DialogDescription className="sr-only">
-            Free BSF larvae production training by Wiggling Gold Ltd. Tap the flyer to send us a message on WhatsApp.
+            Free BSF larvae production training by Wiggling Gold Ltd. Select the flyer to send us a message on WhatsApp.
           </DialogDescription>
 
           <a
@@ -44,6 +46,13 @@ const FlyerPopup = () => {
               height={1650}
               className="block h-auto w-full"
             />
+            <span
+              className="flex items-center justify-center gap-2 bg-[#25D366] px-3 text-base font-bold text-white transition-colors hover:bg-[#1ebe5a]"
+              style={{ height: CTA_HEIGHT }}
+            >
+              <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Chat with us on WhatsApp
+            </span>
           </a>
 
           <DialogPrimitive.Close
