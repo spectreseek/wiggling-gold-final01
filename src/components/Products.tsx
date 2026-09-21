@@ -29,7 +29,7 @@ const Products = () => {
     <section id="products" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-6">
             Our Premium Products
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -64,7 +64,7 @@ const Products = () => {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold font-['Outfit'] text-foreground mb-2">
+                    <h3 className="text-xl font-bold font-['Montserrat'] text-foreground mb-2">
                       {product.title}
                     </h3>
                     <p className="text-muted-foreground mb-3">

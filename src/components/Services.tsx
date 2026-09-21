@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Wrench, FileText, Users, MapPin, Lightbulb } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -35,7 +36,7 @@ const Services = () => {
     <section className="py-24 bg-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-6">
             Our Services
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -53,7 +54,7 @@ const Services = () => {
               <div className="w-14 h-14 bg-gradient-earth rounded-xl flex items-center justify-center mb-4">
                 <service.icon className="h-7 w-7 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-bold font-['Outfit'] text-foreground mb-2">
+              <h3 className="text-xl font-bold font-['Montserrat'] text-foreground mb-2">
                 {service.title}
               </h3>
               <p className="text-muted-foreground">
@@ -64,8 +65,8 @@ const Services = () => {
         </div>
         
         <div className="text-center mt-12 animate-fade-in">
-          <Button size="lg" className="bg-gradient-earth hover:opacity-90 transition-smooth shadow-medium">
-            Learn More About Our Services
+          <Button asChild size="lg" className="bg-gradient-earth hover:opacity-90 transition-smooth shadow-medium">
+            <Link to="/contact">Book a Consultation</Link>
           </Button>
         </div>
       </div>

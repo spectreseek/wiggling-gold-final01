@@ -33,7 +33,7 @@ const Impact = () => {
     <section id="impact" className="py-24 bg-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-6">
             Environmental Impact
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -52,7 +52,7 @@ const Impact = () => {
                 <div className="w-16 h-16 bg-gradient-earth rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-smooth">
                   <impact.icon className="h-8 w-8 text-primary-foreground" />
                 </div>
-                <h3 className="text-2xl font-bold font-['Outfit'] text-foreground mb-3">
+                <h3 className="text-2xl font-bold font-['Montserrat'] text-foreground mb-3">
                   {impact.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -70,7 +70,7 @@ const Impact = () => {
         
         <div className="mt-16 p-8 bg-gradient-earth rounded-2xl shadow-strong animate-fade-in">
           <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-3xl font-bold font-['Outfit'] text-primary-foreground mb-4">
+            <h3 className="text-3xl font-bold font-['Montserrat'] text-primary-foreground mb-4">
               Join the Sustainability Revolution
             </h3>
             <p className="text-lg text-primary-foreground/90 mb-6">

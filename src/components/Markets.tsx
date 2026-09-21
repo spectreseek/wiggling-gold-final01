@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import fishFarmImg from "@/assets/aquaculture-tilapia.jpg";
 import poultryFarmImg from "@/assets/poultry-broilers.jpg";
 import facilityImg from "@/assets/hero-image.jpg";
@@ -9,6 +10,7 @@ import agricultureImg from "@/assets/products.jpg";
 
 type MarketCardData = {
   category: string;
+  href: string;
   categoryColor: string;
   image: string;
   title: string;
@@ -19,6 +21,7 @@ type MarketCardData = {
 const MARKETS: MarketCardData[] = [
   {
     category: "AQUACULTURE",
+    href: "/products",
     categoryColor: "#4a9fd8",
     image: fishFarmImg,
     title: "Sustainable Protein for Aquaculture",
@@ -33,6 +36,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "POULTRY",
+    href: "/products",
     categoryColor: "#ff6b6b",
     image: poultryFarmImg,
     title: "Next-Generation Poultry Nutrition",
@@ -47,6 +51,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "AGRICULTURE",
+    href: "/products",
     categoryColor: "#2d5a3d",
     image: agricultureImg,
     title: "Organic Fertilizer & Soil Enhancement",
@@ -61,6 +66,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "FEED PRODUCERS",
+    href: "/products",
     categoryColor: "#0ea5a0", // teal
     image: feedMillImg,
     title: "BSF Ingredients for Feed Manufacturers",
@@ -75,6 +81,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "RESEARCH INSTITUTIONS",
+    href: "/contact",
     categoryColor: "#64748b", // slate
     image: facilityImg,
     title: "Partnerships for Science and Innovation",
@@ -89,6 +96,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "STUDENTS",
+    href: "/project-mansa",
     categoryColor: "#f59e0b", // amber
     image: agricultureImg,
     title: "Learning Opportunities in Insect Agritech",
@@ -103,6 +111,7 @@ const MARKETS: MarketCardData[] = [
   },
   {
     category: "BSF ENTREPRENEURSHIP",
+    href: "/project-mansa",
     categoryColor: "#10b981", // green
     image: bsfLarvaeImg,
     title: "Prospective BSF Entrepreneurs",
@@ -118,10 +127,10 @@ const MARKETS: MarketCardData[] = [
 ];
 
 const Markets = () => {
-  const cardsRef = useRef<Array<HTMLArticleElement | null>>([]);
+  const cardsRef = useRef<Array<HTMLElement | null>>([]);
 
   useEffect(() => {
-    const cards = cardsRef.current.filter(Boolean) as HTMLArticleElement[];
+    const cards = cardsRef.current.filter(Boolean) as HTMLElement[];
     if (!cards.length) return;
 
     const observer = new IntersectionObserver(
@@ -143,7 +152,7 @@ const Markets = () => {
     <section aria-label="Markets We Serve" className="w-full bg-[#fafafa]">
       <div className="mx-auto max-w-[1280px] px-6 py-20">
         <div className="text-center mb-10">
-          <h2 className="text-[36px] leading-tight font-bold text-[--primary]">Markets We Serve</h2>
+          <h2 className="text-[36px] leading-tight font-bold text-primary">Markets We Serve</h2>
           <p className="mt-3 text-[16px] text-[#6b7280]">
             Our innovative solutions providing sustainable protein across multiple industries
           </p>
@@ -154,8 +163,7 @@ const Markets = () => {
             <article
               key={m.category}
               ref={(el) => (cardsRef.current[idx] = el)}
-              tabIndex={0}
-              className="market-card outline-none focus:ring-2 focus:ring-blue-400 rounded-2xl bg-[#f2f2f2] shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] cursor-pointer flex flex-col"
+              className="market-card relative focus-within:ring-2 focus-within:ring-blue-400 rounded-2xl bg-[#f2f2f2] shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] flex flex-col"
             >
               <div className="relative overflow-hidden">
                 <img
@@ -172,18 +180,23 @@ const Markets = () => {
                   {m.category}
                 </span>
 
-                <button
-                  className="absolute top-4 right-4 h-12 w-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-transform hover:scale-110 hover:bg-white"
-                  aria-label={`Learn more about ${m.category.toLowerCase()}`}
+                <div
+                  aria-hidden="true"
+                  className="absolute top-4 right-4 h-12 w-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
                 >
-                  <ArrowUpRight className="text-[--primary]" />
-                </button>
+                  <ArrowUpRight className="text-primary" />
+                </div>
 
                 <div className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-10 transition-opacity bg-black" />
               </div>
 
               <div className="p-6 flex flex-col">
-                <h3 className="text-[22px] font-bold text-[#1a2b4a] leading-snug mb-3">{m.title}</h3>
+                <h3 className="text-[22px] font-bold text-[#1a2b4a] leading-snug mb-3">
+                  {/* Stretched link: the whole card is clickable with a single tab stop. */}
+                  <Link to={m.href} className="outline-none after:absolute after:inset-0 after:content-['']">
+                    {m.title}
+                  </Link>
+                </h3>
                 <p className="text-[15px] text-[#4a5568] leading-relaxed mb-4">{m.description}</p>
 
                 <ul className="space-y-2">

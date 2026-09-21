@@ -58,6 +58,9 @@ export default {
         'gradient-secondary': 'var(--gradient-secondary)',
         'gradient-accent': 'var(--gradient-accent)',
         'gradient-hero': 'var(--gradient-hero)',
+        // Used across pages but previously undefined, which left icon chips and buttons blank.
+        'gradient-earth': 'var(--gradient-primary)',
+        'gradient-gold': 'var(--gradient-secondary)',
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',

@@ -3,7 +3,7 @@ const CircularEconomy = () => {
     <section className="py-24 bg-[#F2F2F2]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-8 text-center animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-8 text-center animate-fade-in">
             From Waste to Worth: The Future of Ghanaian Agriculture
           </h2>
           
@@ -13,7 +13,7 @@ const CircularEconomy = () => {
             </p>
             
             <p>
-              Our process takes waste streams—such as brewery spent grain and market produce scraps—and transforms them into two highly valuable commodities: <strong className="text-secondary font-semibold">high-protein animal feed</strong> and <strong className="text-secondary font-semibold">nutrient-rich organic fertilizer</strong>.
+              Our process takes waste streams—such as brewery spent grain and market produce scraps—and transforms them into two highly valuable commodities: <strong className="text-primary font-semibold">high-protein animal feed</strong> and <strong className="text-primary font-semibold">nutrient-rich organic fertilizer</strong>.
             </p>
           </div>
         </div>

@@ -29,7 +29,7 @@ const About = () => {
     <section id="about" className="py-24 bg-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-6">
             Leading the Circular Economy
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -48,7 +48,7 @@ const About = () => {
               <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-earth rounded-full mb-4">
                 <stat.icon className="h-7 w-7 text-primary-foreground" />
               </div>
-              <div className="text-3xl font-bold font-['Outfit'] text-foreground mb-2">
+              <div className="text-3xl font-bold font-['Montserrat'] text-foreground mb-2">
                 {stat.value}
               </div>
               <p className="text-sm text-muted-foreground">

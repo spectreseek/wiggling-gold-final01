@@ -1,6 +1,17 @@
 import { Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
 import { MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/wigo-footer-logo.png";
+
+// Every link points at a real page. The old #process, #products and #impact
+// anchors did not exist on the home page.
+const quickLinks = [
+  { to: "/about", label: "About Us" },
+  { to: "/process", label: "Our Process" },
+  { to: "/products", label: "Products" },
+  { to: "/project-mansa", label: "Project Mansa" },
+  { to: "/faq", label: "FAQ" },
+];
 
 const Footer = () => {
   return (
@@ -16,51 +27,33 @@ const Footer = () => {
               <span className="text-secondary font-semibold">Turning dirt into gold</span> | Transforming waste into sustainable solutions for a better tomorrow.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="https://wa.me/233556943631" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+              <a href="https://wa.me/233556943631" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
                 <MessageCircle className="h-5 w-5 text-background" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
                 <Linkedin className="h-5 w-5 text-background" />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="bg-background/10 hover:bg-secondary p-2 rounded-full transition-smooth">
                 <Facebook className="h-5 w-5 text-background" />
               </a>
             </div>
           </div>
           
           <div>
-            <h4 className="font-bold font-['Outfit'] text-lg mb-4">Quick Links</h4>
+            <h4 className="font-bold font-['Montserrat'] text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
-                <a href="#about" className="text-background/80 hover:text-secondary transition-smooth">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#process" className="text-background/80 hover:text-secondary transition-smooth">
-                  Our Process
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="text-background/80 hover:text-secondary transition-smooth">
-                  Products
-                </a>
-              </li>
-              <li>
-                <a href="#impact" className="text-background/80 hover:text-secondary transition-smooth">
-                  Impact
-                </a>
-              </li>
-              <li>
-                <a href="/project-mansa" className="text-background/80 hover:text-secondary transition-smooth">
-                  Project Mansa
-                </a>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="text-background/80 hover:text-secondary transition-smooth">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           
           <div>
-            <h4 className="font-bold font-['Outfit'] text-lg mb-4">Contact</h4>
+            <h4 className="font-bold font-['Montserrat'] text-lg mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <Mail className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />

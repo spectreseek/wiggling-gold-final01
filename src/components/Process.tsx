@@ -26,7 +26,7 @@ const Process = () => {
   return (
     <section className="py-24 bg-accent/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold font-['Outfit'] text-foreground mb-12 text-center animate-fade-in">
+        <h2 className="text-4xl md:text-5xl font-bold font-['Montserrat'] text-foreground mb-12 text-center animate-fade-in">
           Our Sustainable Process in Action
         </h2>
         
@@ -36,22 +36,22 @@ const Process = () => {
             return (
               <Card 
                 key={index}
-                className="relative overflow-hidden border-2 hover:border-secondary transition-all duration-300 hover:shadow-glow-blue animate-fade-in bg-card/80 backdrop-blur-sm"
+                className="relative overflow-hidden border-2 hover:border-primary/40 transition-all duration-300 hover:shadow-glow-blue animate-fade-in bg-card/80 backdrop-blur-sm"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="bg-secondary/10 p-3 rounded-full">
-                      <Icon className="w-6 h-6 text-secondary" />
+                    <div className="bg-primary/10 p-3 rounded-full">
+                      <Icon className="w-6 h-6 text-primary" />
                     </div>
-                    <span className="text-5xl font-bold text-secondary/20">{step.number}</span>
+                    <span className="text-5xl font-bold text-primary/20">{step.number}</span>
                   </div>
                   <CardTitle className="text-2xl">{step.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed">
                     {step.description.split('**').map((part, i) => 
-                      i % 2 === 1 ? <strong key={i} className="text-secondary font-semibold">{part}</strong> : part
+                      i % 2 === 1 ? <strong key={i} className="text-primary font-semibold">{part}</strong> : part
                     )}
                   </CardDescription>
                 </CardContent>
