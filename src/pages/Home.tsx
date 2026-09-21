@@ -8,6 +8,7 @@ import Markets from "@/components/Markets";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
+import FlyerPopup from "@/components/FlyerPopup";
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
         <About />
       </main>
       <Footer />
+      <FlyerPopup />
     </div>
   );
 };
