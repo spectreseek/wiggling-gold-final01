@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
-import aquacultureImg from "@/assets/hero-image.jpg";
-import poultryImg from "@/assets/black-soldier-fly.jpg";
+import fishFarmImg from "@/assets/aquaculture-tilapia.jpg";
+import poultryFarmImg from "@/assets/poultry-broilers.jpg";
+import facilityImg from "@/assets/hero-image.jpg";
+import flyImg from "@/assets/black-soldier-fly.jpg";
 import agricultureImg from "@/assets/products.jpg";
 
 type MarketCardData = {
@@ -17,7 +19,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "AQUACULTURE",
     categoryColor: "#4a9fd8",
-    image: aquacultureImg,
+    image: fishFarmImg,
     title: "Sustainable Protein for Aquaculture",
     description:
       "High-quality insect protein for fish and shrimp farming, promoting healthy growth and reducing environmental impact.",
@@ -31,7 +33,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "POULTRY",
     categoryColor: "#ff6b6b",
-    image: poultryImg,
+    image: poultryFarmImg,
     title: "Next-Generation Poultry Nutrition",
     description:
       "Premium insect-based feed for chickens and layers, enhancing egg quality and bird health naturally.",
@@ -59,7 +61,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "FEED PRODUCERS",
     categoryColor: "#0ea5a0", // teal
-    image: poultryImg,
+    image: flyImg,
     title: "BSF Ingredients for Feed Manufacturers",
     description:
       "Consistent, scalable BSF protein meal and oil that integrates seamlessly into commercial feed formulations.",
@@ -73,7 +75,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "RESEARCH INSTITUTIONS",
     categoryColor: "#64748b", // slate
-    image: aquacultureImg,
+    image: facilityImg,
     title: "Partnerships for Science and Innovation",
     description:
       "Collaborative R&D on insect nutrition, waste valorization, and circular bio-economy applications.",
@@ -101,7 +103,7 @@ const MARKETS: MarketCardData[] = [
   {
     category: "BSF ENTREPRENEURSHIP",
     categoryColor: "#10b981", // green
-    image: poultryImg,
+    image: flyImg,
     title: "Prospective BSF Entrepreneurs",
     description:
       "End-to-end support to launch and scale BSF ventures—from starter kits to operational playbooks.",
