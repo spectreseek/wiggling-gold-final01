@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import larvaeImage from "@/assets/larvae-process.jpg";
-import larvaeHandsImage from "@/assets/black-soldier-fly-larvae.jpg";
+import bsfLarvaeImage from "@/assets/bsf-larvae.jpg";
 import productsImage from "@/assets/products.jpg";
 
 const slides = [
   {
-    image: larvaeHandsImage,
+    image: bsfLarvaeImage,
     badge: "New Initiative",
     title: "Project Mansa",
     highlight: "Train. Produce. Process. Prosper.",
@@ -27,7 +27,7 @@ const slides = [
     ctaLink: "/process",
   },
   {
-    image: larvaeHandsImage,
+    image: larvaeImage,
     badge: "The Solution",
     title: "Meet Nature's Most",
     highlight: "Efficient Recycler",

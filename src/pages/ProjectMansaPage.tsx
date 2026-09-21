@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Check, Factory, GraduationCap, Mail, MessageCircle, Warehouse } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
-import larvaeHandsImage from "@/assets/black-soldier-fly-larvae.jpg";
+import bsfLarvaeImage from "@/assets/bsf-larvae.jpg";
 import flyerImg from "@/assets/project-mansa-flyer.jpg";
 
 const WHATSAPP_URL = `https://wa.me/233558240434?text=${encodeURIComponent(
@@ -85,7 +85,7 @@ const ProjectMansaPage = () => {
         <section className="relative pt-32 pb-20 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"
-            style={{ backgroundImage: `url(${larvaeHandsImage})` }}
+            style={{ backgroundImage: `url(${bsfLarvaeImage})` }}
           ></div>
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center animate-fade-in">
