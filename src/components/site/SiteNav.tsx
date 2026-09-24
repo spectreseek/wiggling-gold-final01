@@ -78,12 +78,13 @@ const SiteNav = () => {
         </button>
       </nav>
 
-      {/* Reading progress: a gold line that fills as you move down the page. */}
-      <motion.div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-wg-gold"
-        style={{ scaleX: scrollYProgress }}
-      />
+      {/* Reading progress: a gold line that fills as you move down the page. It's clipped in its own
+          track: at fractional display scaling (125%) a full-width line can round to 1px past the
+          window, which brought up a horizontal scrollbar at the bottom of the page. The scrollbar
+          moved the page's end, the line shrank, the scrollbar left, and the page juddered in a loop. */}
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] overflow-hidden">
+        <motion.div className="h-full origin-left bg-wg-gold" style={{ scaleX: scrollYProgress }} />
+      </div>
 
       <AnimatePresence>
         {open && (
