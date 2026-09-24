@@ -17,12 +17,25 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-// Client-side navigation keeps the previous scroll offset, so send each new page to the top
-// (unless the URL targets an in-page anchor).
+// Client-side navigation keeps the previous scroll offset, so send each new page to the top.
+// A link with an anchor (/products#starter-kit) scrolls to that section instead, once the lazily
+// loaded page has rendered it; give up after about two seconds.
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    if (!hash) window.scrollTo(0, 0);
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    let frame = 0;
+    let tries = 0;
+    const find = () => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (el) el.scrollIntoView();
+      else if (tries++ < 120) frame = requestAnimationFrame(find);
+    };
+    find();
+    return () => cancelAnimationFrame(frame);
   }, [pathname, hash]);
   return null;
 };

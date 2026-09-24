@@ -1,33 +1,27 @@
-import Navbar from "@/components/Navbar";
-import HeroSlider from "@/components/HeroSlider";
-import ThreePillars from "@/components/ThreePillars";
-import MeetOurHeroes from "@/components/MeetOurHeroes";
-import CircularEconomy from "@/components/CircularEconomy";
-import Process from "@/components/Process";
-import Markets from "@/components/Markets";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Footer from "@/components/Footer";
+import PageShell from "@/components/site/PageShell";
+import CtaBand from "@/components/site/CtaBand";
+import Hero from "@/components/home/Hero";
+import TwinCrisis from "@/components/home/TwinCrisis";
+import LifeCycle from "@/components/home/LifeCycle";
+import ProductsBento from "@/components/home/ProductsBento";
+import MansaBand from "@/components/home/MansaBand";
+import Audiences from "@/components/home/Audiences";
 import FlyerPopup from "@/components/FlyerPopup";
 
-const Home = () => {
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <HeroSlider />
-        <ThreePillars />
-        <MeetOurHeroes />
-        <CircularEconomy />
-        <Process />
-        <Markets />
-        <Services />
-        <About />
-      </main>
-      <Footer />
-      <FlyerPopup />
-    </div>
-  );
-};
+const Home = () => (
+  <PageShell
+    title="Wiggling Gold | Turning dirt into gold"
+    description="Wiggling Gold farms black soldier fly larvae that turn Ghana's market and brewery waste into protein feed and organic fertilizer."
+  >
+    <Hero />
+    <TwinCrisis />
+    <LifeCycle />
+    <ProductsBento />
+    <MansaBand />
+    <Audiences />
+    <CtaBand />
+    <FlyerPopup />
+  </PageShell>
+);
 
 export default Home;

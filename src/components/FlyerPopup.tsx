@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { MessageCircle, X } from "lucide-react";
 import { Dialog, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
@@ -14,10 +14,32 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 const FLYER_RATIO = 1275 / 1650;
 const CTA_HEIGHT = "3rem";
 
-// Opens on every mount of the home page (no persistence), so a refresh or
-// returning to Home shows it again.
+const SEEN_KEY = "wg-mansa-flyer-seen";
+
+// Storage can be blocked (private windows, strict settings). Then the flyer simply shows.
+const hasSeenFlyer = () => {
+  try {
+    return localStorage.getItem(SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const markFlyerSeen = () => {
+  try {
+    localStorage.setItem(SEEN_KEY, "1");
+  } catch {
+    // Nothing to do: the flyer will show again next visit.
+  }
+};
+
+// Shows once per visitor, so returning to the homepage doesn't cover it every time.
 const FlyerPopup = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(() => !hasSeenFlyer());
+
+  useEffect(() => {
+    if (open) markFlyerSeen();
+  }, [open]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

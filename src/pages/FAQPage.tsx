@@ -1,451 +1,232 @@
-import { usePageMeta } from "@/hooks/use-page-meta";
-import { useState, useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Search, ChevronDown, ChevronUp, Phone, Mail, MessageCircle, ArrowUp } from "lucide-react";
+import { useMemo, useState, type FormEvent } from "react";
+import * as Accordion from "@radix-ui/react-accordion";
+import { motion } from "motion/react";
+import { MessageCircle, Plus, Search } from "lucide-react";
+import PageShell from "@/components/site/PageShell";
+import PageHero from "@/components/site/PageHero";
+import Marker from "@/components/site/Marker";
+import AnswerText from "@/components/site/AnswerText";
+import { ButtonLink } from "@/components/site/Buttons";
+import { faqCategories } from "@/data/faq";
+import { EMAIL, PHONES, whatsappUrl } from "@/lib/contact";
+import { cn } from "@/lib/utils";
 
-const categories = [
-  { id: "all", label: "All", icon: "📋" },
-  { id: "buyers", label: "For Buyers", icon: "🛒" },
-  { id: "farmers", label: "For Aspiring Farmers", icon: "🌱" },
-  { id: "training", label: "About Training", icon: "🎓" },
-  { id: "general", label: "General", icon: "ℹ️" },
-  { id: "orders", label: "Orders & Delivery", icon: "📦" }
-];
+const filters = [{ id: "all", label: "All" }, ...faqCategories.map(({ id, label }) => ({ id, label }))];
 
-const faqData = [
-  {
-    id: "buyers",
-    questions: [
-      {
-        q: "Is BSF feed safe for my animals?",
-        a: "Absolutely. Black Soldier Fly larvae are widely recognized as safe and nutritious feed for poultry, fish, and livestock globally. BSF protein is rich in essential amino acids, calcium, and lauric acid, which supports animal health and immune function. Our products are processed under hygienic conditions following Ghana FDA guidelines."
-      },
-      {
-        q: "How does protein content compare to fishmeal and soybean?",
-        a: "Our dried BSF larvae contain 42-45% crude protein, which is comparable to soybean meal (44-48%) and while lower than premium fishmeal (60-65%), the amino acid profile is excellent for poultry and aquaculture. Many farmers find BSF to be more cost-effective per unit of usable protein."
-      },
-      {
-        q: "What animals can eat BSF larvae?",
-        a: "BSF larvae are suitable for:\n- Poultry (chickens, ducks, turkeys)\n- Fish (tilapia, catfish, ornamental fish)\n- Pigs and piglets\n- Reptiles and amphibians\n- Pet birds and small mammals\n- Some livestock as a protein supplement"
-      },
-      {
-        q: "Will my animals actually eat them?",
-        a: "Yes! Animals naturally love BSF larvae. The high fat content and natural flavor make them highly palatable. Most farmers report improved feed acceptance and eating behavior."
-      },
-      {
-        q: "What's the shelf life of dried larvae?",
-        a: "When stored properly in a cool, dry place away from direct sunlight, our dried BSF larvae have a shelf life of 12 months. We recommend airtight containers to maintain freshness."
-      },
-      {
-        q: "How should I store the product?",
-        a: "Store in a cool, dry location (below 25°C) in the original packaging or an airtight container. Keep away from moisture and direct sunlight. Refrigeration is not necessary but can extend shelf life."
-      },
-      {
-        q: "How much should I feed my animals?",
-        a: "Feeding recommendations:\n- Poultry: 5-15% of total feed (mix with regular feed)\n- Fish: 10-30% of total diet\n- Pigs: 5-10% as protein supplement\nStart with smaller amounts and gradually increase. Contact us for species-specific feeding guides."
-      },
-      {
-        q: "Can I get a sample before buying in bulk?",
-        a: "Yes! We offer 1kg sample packs for ₵25. Contact us to arrange sample delivery or pickup."
-      },
-      {
-        q: "Do you offer bulk discounts?",
-        a: "Yes, we offer tiered pricing:\n- 5-24kg: Standard rate\n- 25-99kg: 10% discount\n- 100kg+: 15% discount\n- 500kg+: Custom pricing (contact us)"
-      }
-    ]
-  },
-  {
-    id: "farmers",
-    questions: [
-      {
-        q: "How much space do I need to start BSF farming?",
-        a: "You can start small with as little as 10 square meters (about 100 sq ft). A typical backyard setup of 20-30 square meters can produce 10-20kg of larvae per week. Commercial operations typically need 100+ square meters."
-      },
-      {
-        q: "What's the total startup cost?",
-        a: "Startup costs vary by scale:\n- Micro setup (home/backyard): ₵2,000-₵5,000\n- Small-scale (side business): ₵10,000-₵25,000\n- Commercial operation: ₵50,000+\n\nOur training packages include starter colonies and equipment to help reduce initial costs."
-      },
-      {
-        q: "How long until I see returns on my investment?",
-        a: "BSF have a 14-day lifecycle, so you can start producing saleable larvae within 4-6 weeks of setup. Most graduates reach break-even within 3-4 months and profitability within 6 months, depending on scale and market development."
-      },
-      {
-        q: "Is there really a market for BSF products in Ghana?",
-        a: "Absolutely! Market demand includes:\n- Poultry farmers (large and small-scale)\n- Fish farms (growing aquaculture sector)\n- Pet stores and exotic pet owners\n- Reptile and bird breeders\n- Organic fertilizer market\n- Other BSF farmers needing colonies\n\nWith rising imported feed costs, demand continues to grow faster than supply."
-      },
-      {
-        q: "What are the ongoing operational costs?",
-        a: "Main ongoing costs:\n- Waste substrate: Often free from partner sources (breweries, markets)\n- Utilities: Minimal (mainly water)\n- Labor: Part-time for small operations\n- Packaging materials: ₵500-₵2,000/month\n- Maintenance: Minimal\n\nMost costs are variable based on production volume."
-      },
-      {
-        q: "Can I do this part-time or does it require full-time commitment?",
-        a: "Small-scale BSF farming can absolutely be done part-time (2-3 hours daily). The larvae are relatively low-maintenance. Many successful farmers started part-time and scaled up as demand grew."
-      },
-      {
-        q: "Do I need special permits or licenses?",
-        a: "BSF farming is legal in Ghana. Recommended registrations:\n- Business registration (Registrar General's Department)\n- Basic business operating permit (local assembly)\n- If selling feed commercially: Ghana Standards Authority awareness\nWe guide trainees through registration requirements."
-      },
-      {
-        q: "What if I can't find waste substrate locally?",
-        a: "We teach you how to identify and source waste in your area. Options include:\n- Local markets (vegetable scraps)\n- Breweries (spent grain)\n- Food processors\n- Restaurants/hotels\n- Your own household organic waste\n- Maize bran/wheat bran (purchased if needed)"
-      },
-      {
-        q: "What are common mistakes beginners make?",
-        a: "Common mistakes we help trainees avoid:\n- Overfeeding or underfeeding larvae\n- Poor moisture management\n- Inadequate temperature control\n- Not separating larvae by age\n- Rushing to scale before mastering basics\nOur training addresses all these issues with hands-on practice."
-      }
-    ]
-  },
-  {
-    id: "training",
-    questions: [
-      {
-        q: "What's included in the training?",
-        a: "All training packages include:\n- Comprehensive BSF biology education\n- Hands-on practical demonstrations\n- Breeding and harvesting techniques\n- Waste substrate preparation\n- Business and marketing guidance\n- Digital resource materials\n- Starter colony to begin production\n- Certificate of completion\n\nProfessional package adds: Custom consultation, extended support, and full equipment kit."
-      },
-      {
-        q: "Where is the training held?",
-        a: "Training takes place at our facility in Greater Accra. This allows hands-on experience with actual BSF operations. We're exploring online training options for distant participants."
-      },
-      {
-        q: "How many people can attend one session?",
-        a: "To ensure quality and individual attention:\n- Basic: Max 8 participants\n- Professional: Max 5 participants\n- Corporate: Customized for your group size"
-      },
-      {
-        q: "Can I bring someone with me to training?",
-        a: "Yes! Each additional person is ₵200 for Basic package or ₵400 for Professional package. Family members involved in your farm should attend together."
-      },
-      {
-        q: "Do you offer payment plans for training?",
-        a: "Yes, we offer installment options:\n- 50% deposit to secure booking\n- Balance payable before training date\nContact us to discuss flexible payment arrangements."
-      },
-      {
-        q: "What if I need help after training?",
-        a: "Professional package includes 30 days of post-training support via WhatsApp/phone. All trainees can:\n- Join our graduate community (WhatsApp group)\n- Purchase additional consultation hours\n- Attend refresher sessions (discounted)\n- Access our online resource library"
-      },
-      {
-        q: "Do you offer advanced training for scaling up?",
-        a: "Yes! We offer advanced modules:\n- Scaling to commercial production\n- Automation and efficiency optimization\n- Quality control and product development\n- B2B sales and distribution\nContact us for advanced training schedules."
-      }
-    ]
-  },
-  {
-    id: "general",
-    questions: [
-      {
-        q: "Where does your organic waste come from?",
-        a: "We partner with verified, quality sources:\n- Local breweries (spent grain)\n- Wholesale fruit/vegetable markets\n- Food processing facilities\n- Agricultural cooperatives\nAll waste is inspected for quality and safety before use."
-      },
-      {
-        q: "Are BSF farms smelly or attract pests?",
-        a: "When properly managed, BSF farms have minimal odor—often less than traditional composting! BSF larvae actually reduce odors from organic waste. They also naturally deter common pests like houseflies through competitive exclusion and antimicrobial properties."
-      },
-      {
-        q: "What makes your operation sustainable?",
-        a: "Our sustainability impact:\n- Diverts tons of organic waste from landfills monthly\n- Reduces methane emissions from decomposing waste\n- Decreases Ghana's dependence on imported feed (lower carbon footprint)\n- Creates local employment\n- Produces zero waste (larvae excrement becomes fertilizer)\n- Conserves marine resources (reduces fishmeal demand)"
-      },
-      {
-        q: "Are BSF the same as common houseflies?",
-        a: "No! Black Soldier Flies are completely different:\n- Different species (Hermetia illucens)\n- Don't enter homes or land on food\n- Adult flies don't have functional mouthparts (can't eat or spread disease)\n- Short adult lifespan (5-8 days, only for mating)\n- Beneficial insects, not pests"
-      },
-      {
-        q: "How does BSF frass compare to chemical fertilizer?",
-        a: "BSF frass offers advantages:\n- Organic and chemical-free\n- Improves soil structure and microbiology\n- Slow-release nutrients (less runoff)\n- Enhances water retention\n- Safe for organic certification\n- Contains beneficial microbes\nNPK values vary by substrate but typically 2-3% N, 1-2% P, 1-2% K."
-      },
-      {
-        q: "Can BSF survive in Ghana's climate?",
-        a: "BSF thrive in Ghana's warm, tropical climate! Optimal temperature is 27-30°C, which we have year-round. This makes Ghana ideal for BSF farming compared to temperate countries requiring heating systems."
-      }
-    ]
-  },
-  {
-    id: "orders",
-    questions: [
-      {
-        q: "How do I place an order?",
-        a: "Three easy ways:\n1. WhatsApp: [+233 XX XXX XXXX] (fastest response)\n2. Phone: Call us during business hours\n3. Website: Fill out contact form at /contact\nWe'll confirm availability, pricing, and delivery details."
-      },
-      {
-        q: "What's your minimum order quantity?",
-        a: "Minimum orders:\n- Dried larvae: 5kg\n- Live larvae: 2kg\n- Starter colonies: Available in set sizes\n- Frass fertilizer: 10kg (when available)"
-      },
-      {
-        q: "Do you deliver or is it pickup only?",
-        a: "We offer both:\n- Delivery: Available within Greater Accra and surrounding regions. Fees vary by location and order size.\n- Pickup: Free pickup from our facility during business hours (call ahead to confirm availability)"
-      },
-      {
-        q: "How long does delivery take?",
-        a: "Delivery timeframes:\n- Greater Accra: 1-2 business days\n- Other regions: 2-4 business days\n- Bulk orders: Schedule with us (sometimes same-day available)"
-      },
-      {
-        q: "What are delivery costs?",
-        a: "Delivery fees:\n- Within 10km: Free for orders 25kg+\n- Within Greater Accra: ₵20-₵50 depending on distance\n- Outside Accra: Calculated based on location\n- Bulk orders (100kg+): Delivery included"
-      },
-      {
-        q: "What payment methods do you accept?",
-        a: "We accept:\n- Mobile Money (MTN, Vodafone, AirtelTigo)\n- Bank transfer/deposit\n- Cash (pickup orders only)\n- Installment plans for bulk orders (approved customers)"
-      },
-      {
-        q: "What's your return/refund policy?",
-        a: "We stand behind our quality:\n- Products damaged during delivery: Full refund or replacement\n- Quality issues: Report within 48 hours with photos for resolution\n- Change of mind: Contact us within 24 hours; return unopened products for refund (delivery fees non-refundable)"
-      },
-      {
-        q: "Can I get a receipt/invoice?",
-        a: "Yes! All customers receive:\n- Digital receipt via WhatsApp/email\n- Formal invoice for bulk orders\n- Tax-compliant documentation for business purchases"
-      },
-      {
-        q: "Do you ship outside Ghana?",
-        a: "Currently we serve Ghana only. We're exploring export options for neighboring West African countries. Contact us if you're interested in international orders."
-      }
-    ]
-  }
-];
+const inputClass =
+  "w-full rounded-[0.75rem] border-2 border-wg-line bg-wg-paper px-4 py-3 text-base text-wg-ink placeholder:text-wg-muted/70 focus:border-wg-ink focus:outline-none";
 
-const FAQPage = () => {
-  usePageMeta("FAQ | Wiggling Gold");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
-  const [showBackToTop, setShowBackToTop] = useState(false);
-  const [contactForm, setContactForm] = useState({ name: "", email: "", question: "" });
+const AskForm = () => {
+  const [name, setName] = useState("");
+  const [question, setQuestion] = useState("");
+  const [error, setError] = useState("");
+  const [sent, setSent] = useState(false);
 
-  const faqRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleItem = (itemId: string) => {
-    const newOpenItems = new Set(openItems);
-    if (newOpenItems.has(itemId)) {
-      newOpenItems.delete(itemId);
-    } else {
-      newOpenItems.add(itemId);
-    }
-    setOpenItems(newOpenItems);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleContactSubmit = (e: React.FormEvent) => {
+  // No email service is connected yet, so the question goes out as a ready-to-send WhatsApp message.
+  const submit = (e: FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Contact form submitted:", contactForm);
-    setContactForm({ name: "", email: "", question: "" });
-  };
-
-  const getFilteredQuestions = () => {
-    let allQuestions: Array<{category: string, q: string, a: string, id: string}> = [];
-    
-    faqData.forEach(category => {
-      category.questions.forEach((question, index) => {
-        allQuestions.push({
-          ...question,
-          category: category.id,
-          id: `${category.id}-${index}`
-        });
-      });
-    });
-
-    // Filter by category
-    if (activeCategory !== "all") {
-      allQuestions = allQuestions.filter(q => q.category === activeCategory);
+    if (!question.trim()) {
+      setError("Please type your question.");
+      return;
     }
-
-    // Filter by search term
-    if (searchTerm) {
-      allQuestions = allQuestions.filter(q => 
-        q.q.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        q.a.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    return allQuestions;
+    setError("");
+    const intro = name.trim() ? `Hello Wiggling Gold, this is ${name.trim()}.` : "Hello Wiggling Gold.";
+    window.open(whatsappUrl(`${intro} My question: ${question.trim()}`), "_blank", "noopener,noreferrer");
+    setSent(true);
   };
-
-  const filteredQuestions = getFilteredQuestions();
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      
-      {/* Page Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-green-50 to-green-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Breadcrumb */}
-            <nav className="mb-8">
-              <ol className="flex items-center justify-center space-x-2 text-green-600">
-                <li><a href="/" className="hover:text-green-800 transition-colors">Home</a></li>
-                <li className="text-green-400">&gt;</li>
-                <li className="text-green-800 font-medium">FAQ</li>
-              </ol>
-            </nav>
+    <form onSubmit={submit} noValidate className="grid gap-5">
+      <div className="grid gap-2">
+        <label htmlFor="ask-name" className="font-semibold text-wg-ink">
+          Your name <span className="font-normal text-wg-muted">(optional)</span>
+        </label>
+        <input id="ask-name" name="name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} />
+      </div>
+      <div className="grid gap-2">
+        <label htmlFor="ask-question" className="font-semibold text-wg-ink">
+          Your question
+        </label>
+        <textarea
+          id="ask-question"
+          name="question"
+          rows={4}
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? "ask-error" : "ask-help"}
+          className={cn(inputClass, "resize-y", error && "border-red-700")}
+        />
+        {error ? (
+          <p id="ask-error" className="text-sm font-semibold text-red-700">
+            {error}
+          </p>
+        ) : (
+          <p id="ask-help" className="text-sm text-wg-muted">
+            We'll open WhatsApp with your question ready to send.
+          </p>
+        )}
+      </div>
+      <button
+        type="submit"
+        className="inline-flex h-14 items-center justify-center gap-2 self-start rounded-full bg-wg-ink px-7 font-semibold text-wg-paper transition-colors hover:bg-wg-ink/90 active:scale-[0.98]"
+      >
+        <MessageCircle className="h-5 w-5" aria-hidden="true" />
+        Send on WhatsApp
+      </button>
+      {sent && (
+        <p role="status" className="rounded-[0.75rem] bg-wg-leaf-soft px-4 py-3 text-wg-ink">
+          WhatsApp should have opened with your question. Press send there and we'll reply as soon as we can.
+        </p>
+      )}
+    </form>
+  );
+};
 
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Everything you need to know about Black Soldier Fly products and farming
-            </p>
+const FAQPage = () => {
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState("all");
 
-            {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-              <Input
-                type="text"
-                placeholder="Search FAQs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-4 text-lg border-2 border-green-200 focus:border-green-500 rounded-full"
+  const groups = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return faqCategories
+      .filter((c) => active === "all" || c.id === active)
+      .map((c) => ({
+        ...c,
+        questions: c.questions.filter((item) => !q || item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q)),
+      }))
+      .filter((c) => c.questions.length > 0);
+  }, [query, active]);
+
+  const total = groups.reduce((n, g) => n + g.questions.length, 0);
+
+  return (
+    <PageShell
+      title="FAQ | Wiggling Gold"
+      description="Answers about buying black soldier fly feed, starting a BSF farm, training, orders and delivery."
+    >
+      <PageHero
+        title={
+          <>
+            Questions, <Marker>answered.</Marker>
+          </>
+        }
+        intro="Everything about buying BSF feed, starting your own farm, training, and getting your order delivered."
+        actions={
+          <div className="grid w-full max-w-xl gap-2">
+            <label htmlFor="faq-search" className="font-semibold text-wg-ink">
+              Search the questions
+            </label>
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-wg-muted" aria-hidden="true" />
+              <input
+                id="faq-search"
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="h-14 w-full rounded-full border-2 border-wg-line bg-wg-paper pl-12 pr-5 text-base text-wg-ink focus:border-wg-ink focus:outline-none"
               />
             </div>
           </div>
-        </div>
-      </section>
+        }
+      />
 
-      {/* Category Navigation */}
-      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex overflow-x-auto py-4 space-x-2">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-200 ${
-                  activeCategory === category.id
-                    ? "bg-green-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                <span>{category.icon}</span>
-                <span className="text-sm font-medium">{category.label}</span>
-              </button>
+      {/* Category filter, pinned under the nav while you read. */}
+      <div className="sticky top-[72px] z-30 border-y border-wg-line bg-wg-ground/95 backdrop-blur-md">
+        <div role="group" aria-label="Filter by topic" className="mx-auto flex max-w-[1400px] gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] sm:px-6 lg:px-10">
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setActive(f.id)}
+              aria-pressed={active === f.id}
+              className={cn(
+                "relative shrink-0 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors",
+                active === f.id ? "text-wg-ink" : "text-wg-ink/70 hover:text-wg-ink",
+              )}
+            >
+              {active === f.id && (
+                <motion.span layoutId="faq-pill" aria-hidden="true" className="absolute inset-0 rounded-full bg-wg-sun" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+              )}
+              <span className="relative">{f.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <section aria-label="Questions" className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 md:py-20 lg:px-10">
+        <p role="status" className="sr-only">
+          {total} {total === 1 ? "question" : "questions"} shown
+        </p>
+        {groups.length === 0 ? (
+          <div className="max-w-xl py-10">
+            <p className="font-display text-3xl font-bold text-wg-ink">No questions match "{query}".</p>
+            <p className="mt-3 text-lg text-wg-muted">Try a different word, or ask us directly below.</p>
+          </div>
+        ) : (
+          <div className="grid gap-16">
+            {groups.map((g) => (
+              <div key={g.id} className="grid gap-6 lg:grid-cols-12">
+                <h2 className="font-display text-3xl font-extrabold tracking-[-0.02em] text-wg-ink lg:col-span-4 lg:pt-5">{g.label}</h2>
+                <Accordion.Root type="multiple" className="lg:col-span-8">
+                  {g.questions.map((item, i) => (
+                    <Accordion.Item key={item.q} value={`${g.id}-${i}`} className="border-b border-wg-line">
+                      <Accordion.Header>
+                        <Accordion.Trigger className="group flex w-full items-start justify-between gap-6 py-5 text-left font-display text-xl font-bold text-wg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wg-gold md:text-2xl">
+                          {item.q}
+                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-wg-paper transition-colors group-data-[state=open]:bg-wg-sun">
+                            <Plus className="h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-45" aria-hidden="true" />
+                          </span>
+                        </Accordion.Trigger>
+                      </Accordion.Header>
+                      <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                        <div className="max-w-[62ch] pb-6 text-lg leading-relaxed text-wg-muted">
+                          <AnswerText text={item.a} />
+                        </div>
+                      </Accordion.Content>
+                    </Accordion.Item>
+                  ))}
+                </Accordion.Root>
+              </div>
             ))}
           </div>
-        </div>
-      </div>
+        )}
+      </section>
 
-      {/* FAQ Content */}
-      <div ref={faqRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            {filteredQuestions.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-xl text-muted-foreground">No questions found matching your search.</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {filteredQuestions.map((item) => (
-                  <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <button
-                      onClick={() => toggleItem(item.id)}
-                      className="w-full px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between"
-                    >
-                      <span className="text-lg font-medium text-foreground pr-4">{item.q}</span>
-                      {openItems.has(item.id) ? (
-                        <ChevronUp className="h-5 w-5 text-green-600 flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-gray-400 flex-shrink-0" />
-                      )}
-                    </button>
-                    {openItems.has(item.id) && (
-                      <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                        <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                          {item.a}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Still Have Questions Section */}
-      <section className="py-20 bg-green-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Didn't Find Your Answer?
+      {/* Still stuck: ask directly. */}
+      <section aria-labelledby="ask-heading" className="bg-wg-forest">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-12 lg:px-10">
+          <div className="lg:col-span-5">
+            <h2 id="ask-heading" className="font-display text-4xl font-extrabold tracking-[-0.03em] text-wg-forest-text md:text-5xl">
+              Didn't find your answer?
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              We're here to help! Reach out and we'll respond within 24 hours.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm">
-                <MessageCircle className="h-8 w-8 text-green-600 mb-3" />
-                <h3 className="font-semibold mb-2">WhatsApp</h3>
-                <p className="text-sm text-muted-foreground">+233 XX XXX XXXX</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm">
-                <Phone className="h-8 w-8 text-green-600 mb-3" />
-                <h3 className="font-semibold mb-2">Phone</h3>
-                <p className="text-sm text-muted-foreground">Call us directly</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm">
-                <Mail className="h-8 w-8 text-green-600 mb-3" />
-                <h3 className="font-semibold mb-2">Email</h3>
-                <p className="text-sm text-muted-foreground">askwigglinggold@gmail.com</p>
-              </div>
+            <p className="mt-4 max-w-[40ch] text-lg text-wg-forest-muted">Ask us directly. We reply within 24 hours.</p>
+            <ul className="mt-8 grid gap-2 text-wg-forest-text">
+              {PHONES.map((p) => (
+                <li key={p}>
+                  <a href={`tel:${p.replace(/\s/g, "")}`} className="hover:underline">
+                    {p}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href={`mailto:${EMAIL}`} className="hover:underline">
+                  {EMAIL}
+                </a>
+              </li>
+            </ul>
+            <div className="mt-8">
+              <ButtonLink href="/contact" variant="outline" tone="light">
+                Go to the Contact page
+              </ButtonLink>
             </div>
-
-            <form onSubmit={handleContactSubmit} className="max-w-2xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <Input
-                  placeholder="Your Name"
-                  value={contactForm.name}
-                  onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                  required
-                />
-                <Input
-                  type="email"
-                  placeholder="Your Email"
-                  value={contactForm.email}
-                  onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                  required
-                />
-              </div>
-              <Textarea
-                placeholder="Your Question"
-                value={contactForm.question}
-                onChange={(e) => setContactForm({...contactForm, question: e.target.value})}
-                className="mb-4 min-h-[120px]"
-                required
-              />
-              <Button type="submit" className="w-full">
-                Send Question
-              </Button>
-            </form>
+          </div>
+          <div className="rounded-[1.25rem] bg-wg-ground p-6 md:p-10 lg:col-span-6 lg:col-start-7">
+            <AskForm />
           </div>
         </div>
       </section>
-
-      {/* Back to Top Button */}
-      {showBackToTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors z-50"
-        >
-          <ArrowUp className="h-5 w-5" />
-        </button>
-      )}
-
-      <Footer />
-    </div>
+    </PageShell>
   );
 };
 

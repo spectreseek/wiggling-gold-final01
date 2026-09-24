@@ -13,7 +13,38 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        // Homepage redesign faces, self-hosted through @fontsource (see src/main.tsx).
+        display: ['"Bricolage Grotesque Variable"', '"Arial Narrow"', "system-ui", "sans-serif"],
+        body: ['"Figtree Variable"', "system-ui", "-apple-system", '"Segoe UI"', "sans-serif"],
+      },
       colors: {
+        // Redesign palette, taken from the WIGO logo: soil black, larva gold, leaf green.
+        wg: {
+          ground: "#F3F4EE",
+          paper: "#FBFBF8",
+          ink: "#131813",
+          muted: "#586058",
+          line: "#D9DDD3",
+          gold: "#E6A417",
+          "gold-ink": "#8A5B00",
+          "gold-soft": "#F8EBC6",
+          leaf: "#3E8A36",
+          "leaf-soft": "#E1EFDB",
+          soil: "#17130D",
+          "soil-raised": "#221C14",
+          "soil-line": "#3A3126",
+          "soil-text": "#EFEAE0",
+          "soil-muted": "#B3AA9B",
+          // Straight from the logo: the G's sun yellow and the O's lime, plus a deep forest to carry them.
+          sun: "#FFE240",
+          lime: "#9BE870",
+          forest: "#163A1A",
+          "forest-raised": "#1F4A23",
+          "forest-text": "#EEF5EA",
+          "forest-muted": "#B5CDB0",
+          amber: "#3B2A07",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -79,6 +110,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "wg-warm": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -127,6 +162,8 @@ export default {
         },
       },
       animation: {
+        // Hero photo: the grey copy on top fades away once, revealing the colour photo.
+        "wg-warm": "wg-warm 2.2s ease-in-out 0.6s forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out",

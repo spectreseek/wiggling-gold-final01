@@ -1,58 +1,61 @@
-import { usePageMeta } from "@/hooks/use-page-meta";
-import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ArrowRight, Check, Factory, GraduationCap, Mail, MessageCircle, Warehouse } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
-import bsfLarvaeImage from "@/assets/bsf-larvae.jpg";
+import { motion, useReducedMotion } from "motion/react";
+import { Factory, GraduationCap, Mail, MessageCircle, Warehouse } from "lucide-react";
 import flyerImg from "@/assets/project-mansa-flyer.jpg";
+import audience from "@/assets/training-audience.jpg";
+import graduates from "@/assets/training-graduates.jpg";
+import group from "@/assets/training-group.jpg";
+import PageShell from "@/components/site/PageShell";
+import Reveal from "@/components/site/Reveal";
+import CountUp from "@/components/site/CountUp";
+import TypedText from "@/components/site/TypedText";
+import { ButtonLink } from "@/components/site/Buttons";
+import { EMAIL, MANSA_PHONE, MANSA_WHATSAPP_URL } from "@/lib/contact";
 
-const WHATSAPP_URL = `https://wa.me/233558240434?text=${encodeURIComponent(
-  "Hello, I would like to know more about Project Mansa.",
-)}`;
+const steps = [
+  { word: "Train.", color: "text-wg-forest-text" },
+  { word: "Produce.", color: "text-wg-lime" },
+  { word: "Process.", color: "text-wg-forest-text" },
+  { word: "Prosper.", color: "text-wg-sun" },
+];
 
+// Figures copied unchanged, pending confirmation.
 const stats = [
-  { value: "16", label: "Regions of Ghana" },
-  { value: "800+", label: "People to be trained nationwide" },
-  { value: "300+", label: "People already trained by Wiggling Gold" },
+  { value: "16", label: "regions of Ghana" },
+  { value: "800+", label: "people to be trained nationwide" },
+  { value: "300+", label: "people already trained by Wiggling Gold" },
   { value: "20+", label: "BSF farms supported" },
 ];
 
+// The programme's own phases, in order.
 const phases = [
   {
     icon: GraduationCap,
     phase: "Phase 1",
-    title: "Training & Starter Support",
+    title: "Training and starter support",
     paragraphs: [
-      "Project Mansa begins with Black Soldier Fly production training across Ghana's 16 regions.",
-      "The initiative targets at least 50 participants in each region, reaching a minimum of 800 people nationwide.",
-      "Participants will receive practical and theoretical training designed to equip them with the knowledge and tools required to begin BSF production. The program intentionally creates opportunities for youth, women, farmers, and persons who are deaf or hard of hearing.",
+      "Black soldier fly production training across Ghana's 16 regions, with at least 50 participants per region and a minimum of 800 people nationwide.",
+      "Participants get practical and theoretical training, and the tools to start producing. The programme deliberately makes room for youth, women, farmers, and people who are deaf or hard of hearing.",
     ],
   },
   {
     icon: Factory,
     phase: "Phase 2",
-    title: "Regional Processing Hubs",
+    title: "Regional processing hubs",
     paragraphs: [
-      "The second phase will establish regional BSF processing hubs across all 16 regions.",
-      "These facilities will support processing, drying, packaging, quality control and aggregation of Black Soldier Fly products from producers within each region.",
-      "The regional hubs will help connect individual producers to a larger and more organized value chain.",
+      "BSF processing hubs in all 16 regions, handling processing, drying, packaging, quality control and aggregation for the producers around them.",
+      "The hubs connect individual producers to a larger, more organized value chain.",
     ],
   },
   {
     icon: Warehouse,
     phase: "Phase 3",
-    title: "National BSF Hub",
+    title: "A national BSF hub",
     paragraphs: [
-      "The final phase envisions a large-scale 100-ton national Black Soldier Fly facility serving as the central hub of the Project Mansa ecosystem.",
-      "The facility will support large-scale production, research and development, quality control, aggregation, warehousing, distribution and potential export opportunities.",
+      "A 100-ton national black soldier fly facility at the centre of the Project Mansa ecosystem.",
+      "It will support large-scale production, research and development, quality control, aggregation, warehousing, distribution and potential export.",
     ],
   },
 ];
-
-const steps = ["Train", "Produce", "Process", "Prosper"];
 
 const partners = [
   "Government institutions",
@@ -65,7 +68,7 @@ const partners = [
   "Individuals who share our vision",
 ];
 
-const supportTypes = [
+const support = [
   "Financial sponsorship",
   "Technical expertise",
   "Training and research support",
@@ -74,324 +77,278 @@ const supportTypes = [
   "Equipment",
   "Organic waste supply",
   "Market access",
-  "Other forms of in-kind support",
+  "Other in-kind support",
 ];
 
+const Chips = ({ items, tone }: { items: string[]; tone: "lime" | "sun" }) => (
+  <ul className="flex flex-wrap gap-2.5">
+    {items.map((item, i) => (
+      <Reveal as="li" key={item} delay={i * 0.03}>
+        <span className={`inline-block rounded-full px-4 py-2 text-[15px] font-semibold text-wg-ink ${tone === "lime" ? "bg-wg-lime" : "bg-wg-sun"}`}>
+          {item}
+        </span>
+      </Reveal>
+    ))}
+  </ul>
+);
+
 const ProjectMansaPage = () => {
-  usePageMeta("Project Mansa | Wiggling Gold Limited", "Project Mansa is a nationwide Black Soldier Fly development initiative by Wiggling Gold Limited, building training, regional processing hubs and a national hub across all 16 regions of Ghana.");
+  const reduce = useReducedMotion();
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        {/* Hero */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-10"
-            style={{ backgroundImage: `url(${bsfLarvaeImage})` }}
-          ></div>
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center animate-fade-in">
-              <div className="inline-flex items-center gap-2 bg-accent rounded-full px-5 py-2 mb-6">
-                <span className="text-sm font-semibold tracking-wider text-accent-foreground uppercase">
-                  Wiggling Gold Limited
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-                Project Mansa
-                <span className="block text-primary mt-2 text-3xl md:text-5xl">
-                  Train. Produce. Process. Prosper.
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light mb-6">
-                Project Mansa is a nationwide Black Soldier Fly (BSF) development initiative by Wiggling Gold
-                Limited, designed to build a sustainable insect farming ecosystem across Ghana.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-                The project seeks to equip Ghanaians with practical skills in Black Soldier Fly production,
-                establish regional production and processing infrastructure, create economic opportunities, and
-                contribute to more affordable and sustainable animal feed production.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gradient-primary hover:opacity-90 transition-smooth shadow-soft rounded-full h-14 px-8 text-base font-semibold"
+    <PageShell
+      title="Project Mansa | Wiggling Gold"
+      description="Project Mansa is a nationwide black soldier fly initiative by Wiggling Gold Limited: training, regional processing hubs and a national hub across all 16 regions of Ghana."
+    >
+      {/* Opening: the programme's own green, its four-word promise, and the real flyer. */}
+      <section className="bg-wg-forest">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-4 pb-20 pt-12 sm:px-6 md:pt-20 lg:grid-cols-12 lg:items-center lg:px-10">
+          <div className="lg:col-span-7">
+            <p className="font-display text-lg font-bold text-wg-lime">A Wiggling Gold initiative</p>
+            <h1 className="mt-3 font-display text-6xl font-extrabold leading-[0.95] tracking-[-0.035em] text-wg-forest-text sm:text-7xl xl:text-8xl">
+              Project Mansa
+            </h1>
+            <p className="mt-6 font-display text-3xl font-bold leading-tight tracking-[-0.02em] md:text-4xl" aria-label="Train. Produce. Process. Prosper.">
+              {steps.map(({ word, color }, i) => (
+                <motion.span
+                  key={word}
+                  aria-hidden="true"
+                  className={`mr-[0.3em] inline-block ${color}`}
+                  initial={reduce ? false : { opacity: 0, y: "0.5em" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.3 + i * 0.14 }}
                 >
-                  <a href="#partner">
-                    Partner With Us
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-[#25D366] text-white hover:bg-[#1ebe5a] transition-smooth rounded-full h-14 px-8 text-base font-semibold"
-                >
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="mr-2 h-5 w-5" />
-                    Chat on WhatsApp
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Track record */}
-        <section className="py-12 bg-accent">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="max-w-3xl mx-auto text-center text-lg text-muted-foreground leading-relaxed mb-10">
-              Project Mansa builds on Wiggling Gold's experience in Ghana's BSF industry, including training more
-              than 300 people and supporting the establishment of 20+ Black Soldier Fly farms.
-            </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              {stats.map((stat) => (
-                <Card key={stat.label} className="p-6 text-center bg-card border-border">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm md:text-base text-muted-foreground leading-snug">{stat.label}</div>
-                </Card>
+                  {word}
+                </motion.span>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Why Project Mansa */}
-        <section className="py-20 bg-background overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="animate-slide-up">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Why Project Mansa?</h2>
-                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                  <p>
-                    Ghana's agriculture sector continues to face challenges including the rising cost of animal
-                    feed, organic waste management, limited employment opportunities, and the need for more
-                    sustainable agricultural production systems.
-                  </p>
-                  <p>
-                    Black Soldier Fly farming presents an opportunity to address several of these challenges
-                    simultaneously.
-                  </p>
-                  <p>
-                    Through Project Mansa, organic waste can be transformed into valuable resources — producing
-                    nutritious insect protein for poultry, fish, pigs and other livestock while generating organic
-                    fertilizer for crop production.
-                  </p>
-                  <p>
-                    At the same time, the project creates opportunities for entrepreneurship, employment, skills
-                    development and income generation.
-                  </p>
-                </div>
-                <p className="mt-6 text-2xl font-bold text-primary">Turning Dirt to Gold.</p>
-              </div>
-              <div className="relative animate-scale-in">
-                <div className="rounded-2xl overflow-hidden shadow-strong">
-                  <img
-                    src={heroImage}
-                    alt="Black Soldier Fly larvae processing organic waste"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-gradient-gold rounded-full blur-3xl opacity-40"></div>
-                <div className="absolute -top-8 -left-8 w-40 h-40 bg-gradient-earth rounded-full blur-3xl opacity-40"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Vision and phases */}
-        <section className="py-20 bg-accent">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Our Vision</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Our vision is to develop an interconnected Black Soldier Fly production ecosystem that operates
-                across all 16 regions of Ghana.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Project Mansa is being implemented through three progressive phases:
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-3 gap-8">
-              {phases.map((item, index) => (
-                <Card
-                  key={item.phase}
-                  className="p-8 hover:shadow-medium transition-smooth bg-card border-border animate-scale-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="w-16 h-16 bg-gradient-earth rounded-2xl flex items-center justify-center mb-6">
-                    <item.icon className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <p className="text-sm font-semibold tracking-wider text-primary uppercase mb-2">{item.phase}</p>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">{item.title}</h3>
-                  <div className="space-y-3 text-muted-foreground leading-relaxed">
-                    {item.paragraphs.map((text) => (
-                      <p key={text}>{text}</p>
-                    ))}
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            <p className="max-w-3xl mx-auto text-center text-lg text-muted-foreground leading-relaxed mt-14">
-              Together, these three phases create a pathway that moves participants from training to production,
-              from production to processing, and ultimately from enterprise to prosperity.
             </p>
-          </div>
-        </section>
-
-        {/* More than a training project */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">More Than a Training Project</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Project Mansa is designed to create an entire value chain.
-              </p>
-              <blockquote className="text-2xl md:text-3xl font-semibold text-primary leading-snug my-8">
-                A farmer trained today should not have to operate in isolation tomorrow.
-              </blockquote>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Through regional infrastructure, technical partnerships, research, quality assurance and market
-                development, Project Mansa seeks to build a system where producers can grow alongside the industry.
-              </p>
-            </div>
-
-            <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              {steps.map((step, index) => (
-                <div
-                  key={step}
-                  className="rounded-2xl bg-gradient-primary text-primary-foreground py-6 px-4 text-center shadow-medium"
-                >
-                  <div className="text-sm opacity-80 mb-1">Step {index + 1}</div>
-                  <div className="text-2xl font-bold">{step}.</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Partner */}
-        <section id="partner" className="py-20 bg-accent scroll-mt-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Partner With Project Mansa</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Achieving a nationwide transformation requires collaboration.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Wiggling Gold welcomes partnerships with government institutions, development organizations,
-                universities and research institutions, private companies, financial institutions, foundations,
-                agricultural organizations and individuals who share our vision.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <Card className="p-8 bg-card border-border">
-                <h3 className="text-2xl font-bold text-foreground mb-5">Who we welcome</h3>
-                <ul className="space-y-3">
-                  {partners.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-muted-foreground">
-                      <Check className="h-5 w-5 mt-0.5 shrink-0 text-primary" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-              <Card className="p-8 bg-card border-border">
-                <h3 className="text-2xl font-bold text-foreground mb-5">How you can support</h3>
-                <ul className="space-y-3">
-                  {supportTypes.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-muted-foreground">
-                      <Check className="h-5 w-5 mt-0.5 shrink-0 text-primary" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
-
-            <p className="max-w-3xl mx-auto text-center text-lg text-muted-foreground leading-relaxed mt-12">
-              Whether you support the training of one participant or an entire region, your contribution can help
-              create livelihoods, strengthen sustainable agriculture and build Ghana's emerging Black Soldier Fly
-              industry.
+            <p className="mt-7 max-w-[50ch] text-lg leading-relaxed text-wg-forest-muted md:text-xl">
+              A nationwide black soldier fly programme building a sustainable insect farming ecosystem across Ghana: skills,
+              regional infrastructure, jobs, and more affordable animal feed.
             </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <ButtonLink href="#partner" tone="sun" arrow>
+                Partner with us
+              </ButtonLink>
+              <ButtonLink href={MANSA_WHATSAPP_URL} variant="outline" tone="light" icon={<MessageCircle className="h-5 w-5" aria-hidden="true" />}>
+                Chat on WhatsApp
+              </ButtonLink>
+            </div>
           </div>
-        </section>
+          <motion.a
+            href={MANSA_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open the Project Mansa conversation on WhatsApp"
+            className="mx-auto block w-full max-w-sm overflow-hidden rounded-[1.25rem] lg:col-span-4 lg:col-start-9 lg:max-w-none"
+            initial={reduce ? false : { opacity: 0, rotate: 4, y: 40 }}
+            animate={{ opacity: 1, rotate: 2, y: 0 }}
+            whileHover={reduce ? undefined : { rotate: 0, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 90, damping: 16 }}
+          >
+            <img
+              src={flyerImg}
+              alt="Project Mansa flyer: free two-day hands-on black soldier fly training by Wiggling Gold Ltd."
+              width={1275}
+              height={1650}
+              className="h-auto w-full"
+            />
+          </motion.a>
+        </div>
+      </section>
 
-        {/* Be part of it */}
-        <section className="py-20 bg-gradient-primary text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">Be Part of Project Mansa</h2>
-                <div className="space-y-4 text-lg leading-relaxed opacity-95">
-                  <p>Project Mansa represents more than Black Soldier Fly farming.</p>
-                  <p>It is about people, livelihoods, agriculture, sustainability and opportunity.</p>
-                  <p>
-                    We are building a system where waste becomes a resource, knowledge becomes enterprise, and
-                    enterprise creates prosperity.
-                  </p>
-                  <p className="font-semibold">Join Wiggling Gold Limited as we take Project Mansa across Ghana.</p>
-                </div>
-                <p className="mt-6 text-xl font-bold text-secondary">Train. Produce. Process. Prosper.</p>
-                <div className="flex flex-wrap gap-4 mt-8">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-[#25D366] text-white hover:bg-[#1ebe5a] transition-smooth rounded-full h-14 px-8 text-base font-semibold"
-                  >
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                      <MessageCircle className="mr-2 h-5 w-5" />
-                      Chat on WhatsApp
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="bg-primary-foreground/10 border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/20 transition-smooth rounded-full h-14 px-8 text-base font-semibold"
-                  >
-                    <a href="mailto:askwigglinggold@gmail.com">
-                      <Mail className="mr-2 h-5 w-5" />
-                      Email Us
-                    </a>
-                  </Button>
-                </div>
-                <p className="mt-6 text-sm opacity-90">
-                  Or call +233 55 824 0434 ·{" "}
-                  <Link to="/contact" className="underline underline-offset-4 hover:text-secondary">
-                    Contact page
-                  </Link>
-                </p>
-              </div>
+      {/* Track record. */}
+      <section aria-labelledby="record-heading" className="border-b border-wg-line">
+        <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 md:py-20 lg:px-10">
+          <h2 id="record-heading" className="max-w-[50ch] text-lg leading-relaxed text-wg-muted md:text-xl">
+            Project Mansa builds on Wiggling Gold's experience in Ghana's BSF industry, including training more than 300
+            people and helping to set up 20+ black soldier fly farms.
+          </h2>
+          <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.06} className="border-t-4 border-wg-gold pt-5">
+                <dt className="sr-only">{s.label}</dt>
+                <dd>
+                  <CountUp value={s.value} className="block font-display text-5xl font-extrabold tracking-[-0.03em] text-wg-ink md:text-6xl" />
+                  <span className="mt-2 block max-w-[22ch] text-wg-muted">{s.label}</span>
+                </dd>
+              </Reveal>
+            ))}
+          </dl>
 
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open the Project Mansa flyer conversation on WhatsApp"
-                className="block max-w-sm mx-auto lg:max-w-md rounded-2xl overflow-hidden shadow-strong hover:scale-[1.02] transition-smooth"
-              >
+          {/* The proof: real graduates and a real training cohort. */}
+          <div className="mt-14 grid gap-4 md:grid-cols-12">
+            <Reveal className="md:col-span-5">
+              <figure>
                 <img
-                  src={flyerImg}
-                  alt="Project Mansa flyer: free two-day hands-on Black Soldier Fly training by Wiggling Gold Ltd."
+                  src={graduates}
+                  alt="Eight Wiggling Gold trainees in blue overalls holding their certificates of participation"
+                  width={1080}
+                  height={810}
                   loading="lazy"
-                  className="w-full h-auto"
+                  className="aspect-[4/3] w-full rounded-[1.25rem] object-cover"
                 />
-              </a>
+                <figcaption className="mt-3 text-sm text-wg-muted">Graduates with their certificates.</figcaption>
+              </figure>
+            </Reveal>
+            <Reveal className="md:col-span-7" delay={0.1}>
+              <figure>
+                <img
+                  src={group}
+                  alt="A large group of training participants with the Wiggling Gold team in blue WIGO shirts"
+                  width={1280}
+                  height={720}
+                  loading="lazy"
+                  // 15:8 on the 7-column side matches the height of the 4:3 photo on the 5-column side.
+                  className="aspect-[4/3] w-full rounded-[1.25rem] object-cover md:aspect-[15/8]"
+                />
+                <figcaption className="mt-3 text-sm text-wg-muted">A training cohort with the Wiggling Gold team.</figcaption>
+              </figure>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Why: an argument, so it reads as prose beside a photo. */}
+      <section aria-labelledby="why-heading">
+        <div className="mx-auto grid max-w-[1400px] items-center gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-12 lg:px-10">
+          <div className="lg:col-span-6">
+            <h2 id="why-heading" className="font-display text-4xl font-extrabold tracking-[-0.03em] text-wg-ink md:text-5xl">
+              Why Project Mansa?
+            </h2>
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-wg-muted">
+              <Reveal as="p">
+                Ghana's farmers face rising feed costs, growing piles of organic waste, too few jobs, and the need for more
+                sustainable ways to farm.
+              </Reveal>
+              <Reveal as="p">Black soldier fly farming tackles several of these at once.</Reveal>
+              <Reveal as="p">
+                Organic waste becomes nutritious insect protein for poultry, fish, pigs and other livestock, and organic
+                fertilizer for crops. Along the way, it creates businesses, jobs, skills and income.
+              </Reveal>
+            </div>
+            <p className="mt-8 font-display text-3xl font-extrabold tracking-[-0.02em] text-wg-ink">Turning dirt to gold.</p>
+          </div>
+          <Reveal className="lg:col-span-5 lg:col-start-8">
+            <img
+              src={audience}
+              alt="Participants listening at a Wiggling Gold black soldier fly training session"
+              width={1280}
+              height={960}
+              loading="lazy"
+              className="aspect-[4/5] w-full rounded-[1.25rem] object-cover object-[40%_center]"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The three phases as a timeline: order matters here. */}
+      <section aria-labelledby="phases-heading" className="bg-wg-soil">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+          <h2 id="phases-heading" className="font-display text-4xl font-extrabold tracking-[-0.03em] text-wg-soil-text md:text-6xl">
+            Our vision, in three phases.
+          </h2>
+          <p className="mt-4 max-w-[52ch] text-lg text-wg-soil-muted">
+            An interconnected black soldier fly ecosystem operating across all 16 regions of Ghana.
+          </p>
+          <ol className="relative mt-14 grid gap-12 lg:grid-cols-3 lg:gap-10">
+            {/* The line that joins the phases. */}
+            <span aria-hidden="true" className="absolute left-[27px] top-2 h-[calc(100%-1rem)] w-px bg-wg-soil-line lg:left-0 lg:top-[27px] lg:h-px lg:w-full" />
+            {phases.map((p, i) => (
+              <Reveal as="li" key={p.phase} delay={i * 0.12} className="relative pl-20 lg:pl-0 lg:pt-20">
+                <span className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center rounded-full bg-wg-gold text-wg-ink">
+                  <p.icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+                </span>
+                <p className="font-display font-bold text-wg-gold">{p.phase}</p>
+                <h3 className="mt-1 font-display text-2xl font-bold text-wg-soil-text md:text-3xl">{p.title}</h3>
+                <div className="mt-4 space-y-3 leading-relaxed text-wg-soil-muted">
+                  {p.paragraphs.map((t) => (
+                    <p key={t}>{t}</p>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+          <p className="mt-16 max-w-[60ch] text-lg leading-relaxed text-wg-soil-text">
+            Together, the phases move participants from training to production, from production to processing, and from
+            enterprise to prosperity.
+          </p>
+        </div>
+      </section>
+
+      {/* More than training: the quote types itself out. */}
+      <section aria-labelledby="value-chain-heading">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+          <h2 id="value-chain-heading" className="font-display text-lg font-bold text-wg-gold-ink">
+            More than a training project
+          </h2>
+          <blockquote className="mt-6 max-w-[22ch] font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-wg-ink md:text-6xl">
+            <TypedText
+              segments={[
+                { text: "“A farmer trained today should not have to operate in " },
+                { text: "isolation", className: "text-wg-gold-ink" },
+                { text: " tomorrow.”" },
+              ]}
+            />
+          </blockquote>
+          <p className="mt-8 max-w-[56ch] text-lg leading-relaxed text-wg-muted">
+            Project Mansa is designed to build a whole value chain. Through regional infrastructure, technical partnerships,
+            research, quality assurance and market development, producers grow alongside the industry.
+          </p>
+        </div>
+      </section>
+
+      {/* Partners: two long lists, set as chips rather than bullet points. */}
+      <section id="partner" aria-labelledby="partner-heading" className="scroll-mt-24 bg-wg-forest">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+          <h2 id="partner-heading" className="font-display text-4xl font-extrabold tracking-[-0.03em] text-wg-forest-text md:text-6xl">
+            Partner with Project Mansa.
+          </h2>
+          <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-wg-forest-muted">
+            A nationwide transformation takes collaboration. Whether you support one participant or a whole region, you help
+            create livelihoods and build Ghana's black soldier fly industry.
+          </p>
+          <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <h3 className="font-display text-2xl font-bold text-wg-forest-text">Who we welcome</h3>
+              <div className="mt-6">
+                <Chips items={partners} tone="lime" />
+              </div>
+            </div>
+            <div>
+              <h3 className="font-display text-2xl font-bold text-wg-forest-text">How you can support</h3>
+              <div className="mt-6">
+                <Chips items={support} tone="sun" />
+              </div>
             </div>
           </div>
-        </section>
 
-        {/* Sign-off */}
-        <section className="py-12 bg-background text-center">
-          <p className="text-xl font-bold text-foreground">Wiggling Gold Limited</p>
-          <p className="text-muted-foreground">Turning Dirt to Gold.</p>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          <div className="mt-16 grid gap-8 rounded-[1.25rem] bg-wg-forest-raised p-8 md:p-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <p className="font-display text-3xl font-bold leading-tight tracking-[-0.02em] text-wg-forest-text md:text-4xl">
+                Waste becomes a resource. Knowledge becomes enterprise. Enterprise creates prosperity.
+              </p>
+              <p className="mt-4 text-wg-forest-muted">Join Wiggling Gold Limited as we take Project Mansa across Ghana.</p>
+            </div>
+            <div className="flex flex-col gap-3 lg:col-span-5 lg:items-end">
+              <div className="flex flex-wrap gap-3 lg:justify-end">
+                <ButtonLink href={MANSA_WHATSAPP_URL} tone="sun" icon={<MessageCircle className="h-5 w-5" aria-hidden="true" />}>
+                  Chat on WhatsApp
+                </ButtonLink>
+                <ButtonLink href={`mailto:${EMAIL}`} variant="outline" tone="light" icon={<Mail className="h-5 w-5" aria-hidden="true" />}>
+                  Email us
+                </ButtonLink>
+              </div>
+              <p className="text-wg-forest-muted">
+                Or call{" "}
+                <a href={`tel:+233${MANSA_PHONE.replace(/\s/g, "").slice(1)}`} className="font-semibold text-wg-forest-text hover:underline">
+                  {MANSA_PHONE}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </PageShell>
   );
 };
 
