@@ -3,28 +3,74 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 import flyPhoto from "@/assets/bsf-adult.jpg";
 import larvae from "@/assets/bsf-larvae.jpg";
 import poultry from "@/assets/poultry-broilers.jpg";
+import spoiledProduce from "@/assets/waste-spoiled-produce.jpg";
+import ghanaMarket from "@/assets/waste-ghana-market.jpg";
 import LogoLetter, { type Letter } from "@/components/site/LogoLetter";
-import PhotoSlot from "@/components/site/PhotoSlot";
+import Reveal from "@/components/site/Reveal";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+/** Three short facts under a stage: a big value over a short label, side by side. */
+const Facts = ({ facts }: { facts: Fact[] }) => (
+  <ul className="mt-5 grid max-w-[36rem] grid-cols-3 gap-3 border-t border-wg-soil-line pt-4 md:mt-7 md:gap-5 md:pt-5">
+    {facts.map((f) => (
+      <li key={f.value}>
+        <span className="block font-display text-lg font-extrabold leading-tight tracking-[-0.02em] text-wg-sun md:text-2xl">{f.value}</span>
+        <span className="mt-1 block text-xs leading-snug text-wg-soil-muted md:text-sm">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+type Fact = { value: string; label: string };
 
 type Stage = {
   letter: Letter;
   name: string;
   title: string;
   body: string;
+  facts: Fact[];
   visual: ReactNode;
   ground: string;
 };
 
 const photo = "h-full w-full rounded-[1.25rem] object-cover";
 
+// Facts are taken from what the site already says (the FAQ and product copy), so the section
+// never claims more than the rest of the site. The larger figures are still pending confirmation.
 const stages: Stage[] = [
   {
     letter: "W",
     ground: "bg-wg-soil",
     name: "Waste",
     title: "It starts with what everyone else throws away.",
-    body: "We collect brewery spent grain and market produce scraps from local partners and keep them out of landfills.",
-    visual: <PhotoSlot tone="dark" shot="waste arriving at the farm: brewery grain and market scraps" className="h-full w-full" />,
+    body: "We collect spoiled produce from markets and spent grain from breweries, and keep it out of landfills.",
+    facts: [
+      { value: "4 sources", label: "breweries, markets, food processors, farms" },
+      { value: "Every load", label: "checked before it's fed" },
+      { value: "Up to 90%", label: "less waste by volume" },
+    ],
+    // Two free-to-use Unsplash photos: spoiled produce by Marek Studzinski, and a Ghanaian market
+    // stall by Naa Oyoo Quartey, showing where much of that waste comes from.
+    visual: (
+      <div className="grid h-full w-full grid-cols-3 gap-3">
+        <img
+          src={spoiledProduce}
+          alt="A heap of spoiled fruit, the kind of organic waste the larvae feed on"
+          width={1200}
+          height={800}
+          loading="lazy"
+          className={`${photo} col-span-2`}
+        />
+        <img
+          src={ghanaMarket}
+          alt="Peppers for sale in baskets at a Ghanaian market"
+          width={800}
+          height={999}
+          loading="lazy"
+          className={photo}
+        />
+      </div>
+    ),
   },
   {
     letter: "I",
@@ -32,6 +78,11 @@ const stages: Stage[] = [
     name: "The fly",
     title: "Meet the black soldier fly.",
     body: "Hermetia illucens is not a pest. It doesn't bite, doesn't spread disease and isn't drawn to people's homes.",
+    facts: [
+      { value: "5-8 days", label: "adult life, just to mate" },
+      { value: "No mouth", label: "adults can't eat, bite or spread disease" },
+      { value: "27-30°C", label: "ideal warmth, and Ghana's all year" },
+    ],
     visual: (
       <img
         src={flyPhoto}
@@ -49,14 +100,24 @@ const stages: Stage[] = [
     name: "The larva",
     title: "Fourteen days of eating.",
     body: "The larvae work through the waste around the clock and grow into protein-rich biomass in a 14-day cycle.",
+    facts: [
+      { value: "14 days", label: "of eating before harvest" },
+      { value: "2×", label: "their body weight eaten a day" },
+      { value: "42-45%", label: "protein once dried" },
+    ],
     visual: <img src={larvae} alt="Black soldier fly larvae feeding on organic waste" width={1200} height={800} loading="lazy" className={photo} />,
   },
   {
     letter: "O",
     ground: "bg-wg-forest",
     name: "The loop",
-    title: "Feed, fertilizer, and the next generation.",
-    body: "Dried larvae become protein feed. What they leave behind, frass, becomes organic fertilizer. The flies lay eggs, and the cycle starts again.",
+    title: "Feed, fertilizer, and the next batch.",
+    body: "Most larvae are dried into protein feed. The waste they leave behind, called frass, becomes organic fertilizer. A few are kept to grow into flies, and their eggs start the next batch.",
+    facts: [
+      { value: "Feed", label: "for poultry, fish and pigs" },
+      { value: "Frass", label: "organic fertilizer for crops" },
+      { value: "Eggs", label: "from new flies restart the cycle" },
+    ],
     visual: <img src={poultry} alt="Young broiler chickens gathered around a feeder" width={1200} height={800} loading="lazy" className={photo} />,
   },
 ];
@@ -79,21 +140,28 @@ const LetterTile = ({ letter }: { letter: Letter }) => (
   </div>
 );
 
-/** Reduced motion: the same four stages as plain panels, no pinning. */
+/**
+ * Phones and reduced motion: the four stages as stacked panels, each on its own stage colour, so the
+ * soil-to-green story survives without pinning. A small phone doesn't have the height to pin the
+ * heading, text, facts and photo on one screen.
+ */
 const StaticCycle = () => (
   <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-10">
-    <Heading className="mb-14" />
-    <ol className="grid gap-16">
-      {stages.map((s) => (
-        <li key={s.letter} className="grid items-center gap-8 md:grid-cols-2">
+    <Heading className="mb-10" />
+    <ol className="grid gap-4">
+      {stages.map((s, i) => (
+        <Reveal as="li" key={s.letter} className={`grid items-center gap-8 rounded-[1.25rem] p-5 sm:p-8 md:grid-cols-2 ${s.ground}`}>
           <div>
             <LetterTile letter={s.letter} />
-            <p className="mt-6 text-sm font-semibold text-wg-gold">{s.name}</p>
-            <h3 className="mt-2 font-display text-3xl font-bold text-wg-soil-text">{s.title}</h3>
+            <p className="mt-6 text-sm font-semibold text-wg-gold">
+              {i + 1} of {stages.length}: {s.name}
+            </p>
+            <h3 className="mt-2 font-display text-3xl font-bold leading-[1.05] text-wg-soil-text">{s.title}</h3>
             <p className="mt-4 max-w-[46ch] text-lg leading-relaxed text-wg-soil-muted">{s.body}</p>
+            <Facts facts={s.facts} />
           </div>
           <div className="aspect-[4/3]">{s.visual}</div>
-        </li>
+        </Reveal>
       ))}
     </ol>
   </div>
@@ -105,6 +173,7 @@ const StaticCycle = () => (
  */
 const LifeCycle = () => {
   const reduce = useReducedMotion();
+  const isPhone = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -115,7 +184,7 @@ const LifeCycle = () => {
     if (next !== active) setActive(next);
   });
 
-  if (reduce) {
+  if (reduce || isPhone) {
     return (
       <section aria-labelledby="cycle-heading" className="bg-wg-soil">
         <StaticCycle />
@@ -186,7 +255,8 @@ const LifeCycle = () => {
                     <h3 className="mt-2 font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-wg-soil-text md:text-[2.6rem]">
                       {stage.title}
                     </h3>
-                    <p className="mt-4 max-w-[42ch] text-base leading-relaxed text-wg-soil-muted md:text-lg">{stage.body}</p>
+                    <p className="mt-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-wg-soil-muted md:mt-4 md:text-lg">{stage.body}</p>
+                    <Facts facts={stage.facts} />
                   </motion.div>
                 </AnimatePresence>
               </div>
