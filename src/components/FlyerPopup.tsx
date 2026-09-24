@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { MessageCircle, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, X } from "lucide-react";
 import { Dialog, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
 import flyerImg from "@/assets/project-mansa-flyer.jpg";
 
-const WHATSAPP_NUMBER = "233558240434";
-const WHATSAPP_MESSAGE = "Hello, I would like to know more about Project Mansa.";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-
 // Flyer is 1275x1650 (portrait). Width is capped by both the viewport width and
-// the viewport height (minus the WhatsApp bar under the flyer), so the whole
+// the viewport height (minus the register bar under the flyer), so the whole
 // popup always fits without cropping or scrolling.
 const FLYER_RATIO = 1275 / 1650;
 const CTA_HEIGHT = "3rem";
@@ -51,14 +48,13 @@ const FlyerPopup = () => {
         >
           <DialogTitle className="sr-only">Project Mansa - Phase 1 Training</DialogTitle>
           <DialogDescription className="sr-only">
-            Free BSF larvae production training by Wiggling Gold Ltd. Select the flyer to send us a message on WhatsApp.
+            Free BSF larvae production training by Wiggling Gold Ltd. Select the flyer to register for the training.
           </DialogDescription>
 
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with Wiggling Gold about Project Mansa on WhatsApp"
+          <Link
+            to="/project-mansa#register"
+            onClick={() => setOpen(false)}
+            aria-label="Register for the free Project Mansa training"
             className="block overflow-hidden rounded-xl shadow-2xl focus-visible:ring-2 focus-visible:ring-white"
           >
             <img
@@ -69,13 +65,13 @@ const FlyerPopup = () => {
               className="block h-auto w-full"
             />
             <span
-              className="flex items-center justify-center gap-2 bg-[#25D366] px-3 text-base font-bold text-white transition-colors hover:bg-[#1ebe5a]"
+              className="flex items-center justify-center gap-2 bg-wg-sun px-3 text-base font-bold text-wg-ink transition-colors hover:bg-wg-sun/90"
               style={{ height: CTA_HEIGHT }}
             >
-              <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
-              Chat with us on WhatsApp
+              Register for the free training
+              <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
             </span>
-          </a>
+          </Link>
 
           <DialogPrimitive.Close
             aria-label="Close"

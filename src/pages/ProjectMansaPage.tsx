@@ -8,6 +8,7 @@ import PageShell from "@/components/site/PageShell";
 import Reveal from "@/components/site/Reveal";
 import CountUp from "@/components/site/CountUp";
 import TypedText from "@/components/site/TypedText";
+import RegisterSection from "@/components/mansa/RegisterSection";
 import { ButtonLink } from "@/components/site/Buttons";
 import { EMAIL, MANSA_PHONE, MANSA_WHATSAPP_URL } from "@/lib/contact";
 
@@ -126,19 +127,17 @@ const ProjectMansaPage = () => {
               regional infrastructure, jobs, and more affordable animal feed.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <ButtonLink href="#partner" tone="sun" arrow>
-                Partner with us
+              <ButtonLink href="#register" tone="sun" arrow>
+                Register for training
               </ButtonLink>
-              <ButtonLink href={MANSA_WHATSAPP_URL} variant="outline" tone="light" icon={<MessageCircle className="h-5 w-5" aria-hidden="true" />}>
-                Chat on WhatsApp
+              <ButtonLink href="#partner" variant="outline" tone="light">
+                Partner with us
               </ButtonLink>
             </div>
           </div>
           <motion.a
-            href={MANSA_WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open the Project Mansa conversation on WhatsApp"
+            href="#register"
+            aria-label="Register for the free Project Mansa training"
             className="mx-auto block w-full max-w-sm overflow-hidden rounded-[1.25rem] lg:col-span-4 lg:col-start-9 lg:max-w-none"
             initial={reduce ? false : { opacity: 0, rotate: 4, y: 40 }}
             animate={{ opacity: 1, rotate: 2, y: 0 }}
@@ -208,6 +207,9 @@ const ProjectMansaPage = () => {
         </div>
       </section>
 
+      {/* Sign-up comes straight after the proof, while the reader is most convinced. */}
+      <RegisterSection />
+
       {/* Why: an argument, so it reads as prose beside a photo. */}
       <section aria-labelledby="why-heading">
         <div className="mx-auto grid max-w-[1400px] items-center gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-12 lg:px-10">
@@ -272,6 +274,11 @@ const ProjectMansaPage = () => {
             Together, the phases move participants from training to production, from production to processing, and from
             enterprise to prosperity.
           </p>
+          <div className="mt-8">
+            <ButtonLink href="#register" tone="sun" arrow>
+              Register for Phase 1 training
+            </ButtonLink>
+          </div>
         </div>
       </section>
 

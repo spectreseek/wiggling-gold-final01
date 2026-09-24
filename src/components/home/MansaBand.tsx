@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import { MANSA_WHATSAPP_URL } from "@/lib/contact";
 import CountUp from "@/components/site/CountUp";
 import Reveal from "@/components/site/Reveal";
 import TypedText from "@/components/site/TypedText";
@@ -61,14 +60,12 @@ const MansaBand = () => {
                 Discover Project Mansa
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
-              <a
-                href={MANSA_WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/project-mansa#register"
                 className="inline-flex h-14 items-center rounded-full border-2 border-wg-forest-text/25 px-7 font-semibold text-wg-forest-text transition-colors hover:border-wg-forest-text/60 active:scale-[0.98]"
               >
-                Ask about training
-              </a>
+                Register for training
+              </Link>
             </div>
           </Reveal>
 

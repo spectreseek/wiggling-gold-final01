@@ -29,7 +29,7 @@ const SiteNav = () => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b bg-wg-ground/90 backdrop-blur-md transition-colors duration-300",
+        "sticky top-0 z-40 border-b bg-wg-ground transition-colors duration-300",
         scrolled ? "border-wg-line" : "border-transparent",
       )}
     >

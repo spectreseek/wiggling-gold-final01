@@ -9,6 +9,9 @@ export const ORDER_WHATSAPP_URL = whatsappUrl("Hello Wiggling Gold, I would like
 
 export const MANSA_WHATSAPP_URL = whatsappUrl("Hello, I would like to know more about Project Mansa.", MANSA_NUMBER);
 
+/** A message to the Project Mansa line, used by the training registration form. */
+export const mansaWhatsappUrl = (message: string) => whatsappUrl(message, MANSA_NUMBER);
+
 export const EMAIL = "askwigglinggold@gmail.com";
 export const PHONES = ["055 694 3631", "055 694 3630"];
 export const MANSA_PHONE = "055 824 0434";
