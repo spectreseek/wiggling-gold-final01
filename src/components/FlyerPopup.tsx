@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { Link } from "react-router-dom";
-import { ArrowRight, X, Calendar, MapPin, AlertCircle } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { ArrowRight, X, Calendar, MapPin } from "lucide-react";
 import { Dialog, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
 import flyerImg from "@/assets/bsf-training-oct31-flyer.jpg";
 
@@ -11,8 +11,19 @@ const CTA_HEIGHT = "3.25rem";
 
 const SEEN_KEY = "wg-bsf-oct31-training-flyer-seen-v1";
 
-const hasSeenFlyer = () => {
+const isPopupSuppressed = () => {
   try {
+    if (typeof window !== "undefined") {
+      const search = new URLSearchParams(window.location.search);
+      if (
+        search.get("nopopup") === "1" ||
+        search.get("nopopup") === "true" ||
+        search.get("preview") === "1" ||
+        search.get("hidepopup") === "1"
+      ) {
+        return true;
+      }
+    }
     return localStorage.getItem(SEEN_KEY) === "1";
   } catch {
     return false;
@@ -28,7 +39,15 @@ const markFlyerSeen = () => {
 };
 
 const FlyerPopup = () => {
-  const [open, setOpen] = useState(() => !hasSeenFlyer());
+  const location = useLocation();
+  const [open, setOpen] = useState(() => !isPopupSuppressed());
+
+  // Re-check whenever location search changes
+  useEffect(() => {
+    if (isPopupSuppressed()) {
+      setOpen(false);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     if (open) markFlyerSeen();
