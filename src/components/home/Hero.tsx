@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import larvae from "@/assets/bsf-larvae.jpg";
 import { ORDER_WHATSAPP_URL } from "@/lib/contact";
 
@@ -30,6 +30,19 @@ const Hero = () => {
   return (
     <section ref={ref} className="mx-auto grid max-w-[1400px] gap-10 px-4 pb-16 pt-10 sm:px-6 md:pt-16 lg:min-h-[calc(100dvh-72px)] lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10 lg:pb-20">
       <div className="lg:col-span-6">
+        {/* Next Training Badge */}
+        <motion.div {...rise(0.02)} className="mb-4">
+          <Link
+            to="/trainings"
+            className="group inline-flex items-center gap-2 rounded-full border border-wg-gold/40 bg-wg-sun/20 px-4 py-1.5 text-xs sm:text-sm font-bold text-wg-ink backdrop-blur-sm transition-all hover:bg-wg-sun hover:scale-[1.02]"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-wg-gold animate-pulse" />
+            <span className="uppercase tracking-wider font-extrabold text-wg-gold-ink">Upcoming Training:</span>
+            <span>31st Oct BSF Masterclass • Adenta</span>
+            <ArrowRight className="h-3.5 w-3.5 text-wg-ink transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </motion.div>
+
         <h1 className="font-display text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.03em] text-wg-ink sm:text-7xl xl:text-[6.5rem]">
           {/* Word by word, so the line reads as it lands. */}
           {words.map((w, i) => (
@@ -63,6 +76,13 @@ const Hero = () => {
             Order feed
             <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </a>
+          <Link
+            to="/trainings"
+            className="inline-flex h-14 items-center gap-2 rounded-full bg-wg-sun px-7 text-base font-semibold text-wg-ink transition-transform hover:bg-wg-sun/90 active:scale-[0.98]"
+          >
+            <Calendar className="h-4 w-4" />
+            BSF Training
+          </Link>
           <Link
             to="/project-mansa"
             className="inline-flex h-14 items-center rounded-full border-2 border-wg-ink/15 px-7 text-base font-semibold text-wg-ink transition-colors hover:border-wg-ink/40 active:scale-[0.98]"

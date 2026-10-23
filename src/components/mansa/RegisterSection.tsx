@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { Check, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Check, MessageCircle, ArrowRight } from "lucide-react";
 import Reveal from "@/components/site/Reveal";
 import { MANSA_PHONE, mansaWhatsappUrl } from "@/lib/contact";
 import { cn } from "@/lib/utils";
@@ -23,25 +24,31 @@ const REGIONS = [
   "Western North",
 ];
 
-const ROLES = ["A farmer", "A young person or student", "A business owner", "Something else"];
-
-// Taken from the flyer and the Phase 1 description, so the section promises nothing new.
-const INCLUDED = [
-  "Free, two days and hands-on",
-  "Practical and theoretical training",
-  "The tools to start producing",
-  "Open to youth, women, farmers, and people who are deaf or hard of hearing",
+const ROLES = [
+  "Farmer (poultry, fish, pigs, crops)",
+  "Youth entrepreneur / startup",
+  "Community leader / organizer",
+  "Researcher / student",
+  "Potential regional processing partner",
+  "Other",
 ];
 
-const inputClass =
-  "w-full rounded-[0.75rem] border-2 border-wg-line bg-wg-paper px-4 py-3 text-base text-wg-ink focus:border-wg-ink focus:outline-none";
+const INCLUDED = [
+  "Hands-on black soldier fly production training",
+  "Guidance on waste collection, biosecurity and yields",
+  "Connection to our regional processing hub network as it rolls out",
+];
 
 type Field = "name" | "phone" | "region";
 type Errors = Partial<Record<Field, string>>;
 
-const Label = ({ htmlFor, children, optional }: { htmlFor: string; children: string; optional?: boolean }) => (
-  <label htmlFor={htmlFor} className="font-semibold text-wg-ink">
-    {children} {optional && <span className="font-normal text-wg-muted">(optional)</span>}
+const inputClass =
+  "w-full rounded-[0.75rem] border border-wg-ink/20 bg-wg-paper px-4 py-3 text-base text-wg-ink outline-none transition-colors placeholder:text-wg-muted focus:border-wg-ink focus-visible:ring-2 focus-visible:ring-wg-ink";
+
+const Label = ({ htmlFor, children, optional }: { htmlFor: string; children: React.ReactNode; optional?: boolean }) => (
+  <label htmlFor={htmlFor} className="flex items-baseline justify-between text-sm font-semibold text-wg-ink">
+    <span>{children}</span>
+    {optional && <span className="text-xs font-normal text-wg-muted">optional</span>}
   </label>
 );
 
@@ -88,6 +95,26 @@ const RegisterSection = () => {
     <section id="register" aria-labelledby="register-heading" className="scroll-mt-24 border-b border-wg-line bg-wg-sun">
       <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-12 lg:gap-14 lg:px-10">
         <div className="lg:col-span-5">
+          {/* Upcoming Group Training Callout */}
+          <div className="mb-8 rounded-2xl bg-wg-ink p-6 text-wg-paper shadow-lg">
+            <span className="inline-block rounded-full bg-wg-sun px-3 py-0.5 text-xs font-extrabold uppercase tracking-wider text-wg-ink">
+              Specific Date Training
+            </span>
+            <h3 className="mt-3 font-display text-2xl font-bold text-wg-sun">
+              31st Oct Black Soldier Fly Masterclass
+            </h3>
+            <p className="mt-1 text-sm text-wg-paper/85">
+              Venue: <strong>Rufus Green Park, Adenta Accra</strong> • 10:00 AM – 2:00 PM • Training Fee: <strong>₵620</strong> (Secure slot with <strong>₵120</strong>).
+            </p>
+            <Link
+              to="/trainings"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-wg-sun px-4 py-2 text-xs font-bold text-wg-ink transition-transform hover:bg-wg-sun/90 hover:scale-105"
+            >
+              View 31st Oct Training & Payment Details
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
           <p className="font-display text-lg font-bold text-wg-ink/70">Phase 1 is open</p>
           <h2 id="register-heading" className="mt-2 font-display text-4xl font-extrabold leading-[1] tracking-[-0.03em] text-wg-ink md:text-6xl">
             Sign up for the free training.

@@ -10,6 +10,7 @@ const links = [
   { to: "/about", label: "About" },
   { to: "/process", label: "Process" },
   { to: "/products", label: "Products" },
+  { to: "/trainings", label: "Trainings" },
   { to: "/project-mansa", label: "Project Mansa" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },

@@ -31,7 +31,7 @@ const MansaBand = () => {
           Project Mansa
         </p>
         {/* The programme's four steps land one after another, in order. */}
-        <h2 className="mt-4 font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.035em] sm:text-7xl lg:text-8xl">
+        <h2 className="mt-4 font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.03em] sm:text-7xl lg:text-8xl">
           {words.map(({ word, color }, i) => (
             <motion.span
               key={word}
@@ -54,17 +54,17 @@ const MansaBand = () => {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/project-mansa"
+                to="/trainings"
                 className="group inline-flex h-14 items-center gap-2 rounded-full bg-wg-sun px-7 font-semibold text-wg-ink transition-transform hover:bg-wg-sun/90 active:scale-[0.98]"
               >
-                Discover Project Mansa
+                Upcoming 31st Oct Training
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
               <Link
-                to="/project-mansa#register"
+                to="/project-mansa"
                 className="inline-flex h-14 items-center rounded-full border-2 border-wg-forest-text/25 px-7 font-semibold text-wg-forest-text transition-colors hover:border-wg-forest-text/60 active:scale-[0.98]"
               >
-                Register for training
+                Discover Project Mansa
               </Link>
             </div>
           </Reveal>
